@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 
 const createUser = async (req: Request, res: Response) => {
   try {
-    if(!req.session){throw new Error('missing session')}
+    // if(!req.session){throw new Error('missing session')}
       const pass = req.body.password;
       const salt = bcrypt.genSaltSync(10);
       const password = bcrypt.hashSync(pass, salt);
@@ -20,11 +20,11 @@ const createUser = async (req: Request, res: Response) => {
           req.session.sid = result.id;
           res.status(201).send('Success');
       } else {
-          res.status(400).send('Account already exists.');
+          res.status(400).send({error: 'error', message:'Account already exists.'});
       }
-  } catch (err) {
-      console.log(err);
-      res.status(500).send({"message": "Due to error user have not been saved"});
+  } catch (error) {
+      console.log(error);
+      res.status(500).send({error, message: "Due to error user have not been saved"});
   }
 };
 
@@ -47,7 +47,7 @@ const loginUser = async (req: Request, res: Response) => {
 const profileUser = async (req: Request, res: Response) => {
   try {
     if(req.session.sid){
-        res.status(200).send({isAuthenticated: true, id: req.session.id});
+        res.status(200).send({isAuthenticated: true, sid: req.session.sid});
     }
   } catch (err) {
     res.status(500);

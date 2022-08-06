@@ -7,7 +7,7 @@ import Input from "./Input";
 import { useNavigate } from 'react-router-dom';
 import apiUserService from "../Utils/apiUserService";
 import {Login} from '../Types'
-import auth from '../Utils/auth.js';
+import auth from '../Utils/auth';
 
 const fields=loginFields;
 const initialState: Login = {

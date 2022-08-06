@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import apiUserService from '../Utils/apiUserService';
-import auth from '../Utils/auth.js';
+import auth from '../Utils/auth';
 
 const Logout = ({ setIsAuthenticated }) => {
   let navigate = useNavigate();

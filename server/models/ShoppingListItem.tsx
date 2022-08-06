@@ -14,6 +14,10 @@ const ShoppingListItem = sequelize.define('ShoppingListItem', {
         type: DataTypes.STRING,
         allowNull: true
     },
+    userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
 });
 
 
