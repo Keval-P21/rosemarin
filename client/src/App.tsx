@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import RecipesList from './components/RecipesList';
@@ -12,17 +13,44 @@ import WeeklyMenu from './components/WeeklyMenu';
 import RecipeDetails from './components/RecipeDetails';
 import { getMyRecipes } from './Utils/apiDBService';
 import { getMyShoppingList } from './Utils/apiDBServiceShoppingList';
-import LoginPage from './components/Login.tsx';
+import LoginPage from './components/Login';
 import SignupPage from './components/Signup';
-import Logout from './components/Logout.tsx';
+import Logout from './components/Logout';
+import { Recipe, MyRecipe, Ids } from './Types';
+import auth from './Utils/auth.js';
+import apiUserService from './Utils/apiUserService';
+const BASE_URL = 'http://localhost:3001';
 
 function App() {
-  const [recipes, setRecipes] = useState([]);
-  const [myRecipes, setMyRecipes] = useState([]);
-  const [ids, setIds] = useState([]);
+  const [recipes, setRecipes] = useState([] as Recipe[] | []);
+  const [myRecipes, setMyRecipes] = useState([] as MyRecipe[] | []);
+  const [ids, setIds] = useState([] as Ids[] | []);
   const [items, setItems] = useState([]);
-  // const initialState = auth.isAuthenticated();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const initialState = auth.isAuthenticated();
+  const [isAuthenticated, setIsAuthenticated] = useState(initialState);
+
+  useEffect(() => {
+    // try {
+
+    //   // const data = async function () {
+    //   //   let res = await fetch(`${BASE_URL}/login`);
+    //   //   res = await res.json();
+    //   //   console.log(res);
+    //   //   return res;
+    //   // };
+    //   // console.log('data', data());
+    // } catch (error) {
+    //   console.log(error);
+    // }
+    try {
+      apiUserService
+        .profile()
+        .then((data) => setIsAuthenticated(data.isAuthenticated));
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+  
 
   useEffect(() => {
     getMyShoppingList()
@@ -46,7 +74,9 @@ function App() {
           setIds((prev) => {
             let id = el.id;
             let id_tasty = el.id_tasty;
-            const filtered = prev.filter((e) => e.id_tasty !== el.id_tasty);
+            const filtered = prev.filter(
+              (e: MyRecipe) => e.id_tasty !== el.id_tasty
+            );
             return [...filtered, { id, id_tasty }];
           })
         )
@@ -62,28 +92,25 @@ function App() {
   }, [ids]);
 
   return (
-    <div className="font-oxy-regular">
+    <div className='font-oxy-regular'>
       <BrowserRouter>
         <Navbar isAuthenticated={isAuthenticated}></Navbar>
         <Routes>
           <Route
-            exact
-            path="/"
+            path='/'
             element={<LoginPage setIsAuthenticated={setIsAuthenticated} />}
           ></Route>
           <Route
-            exact
-            path="/signup"
+            path='/signup'
             element={<SignupPage setIsAuthenticated={setIsAuthenticated} />}
           ></Route>
           <Route
-            path="/logout"
+            path='/logout'
             element={<Logout setIsAuthenticated={setIsAuthenticated} />}
           />
 
           <Route
-            exact
-            path="/home"
+            path='/home'
             element={
               <RecipesList
                 setRecipes={setRecipes}
@@ -94,8 +121,7 @@ function App() {
             }
           ></Route>
           <Route
-            exact
-            path="/my_recipes"
+            path='/my_recipes'
             element={
               <MyRecipesList
                 myRecipes={myRecipes}
@@ -107,21 +133,18 @@ function App() {
             }
           ></Route>
           <Route
-            exact
-            path="/recipes/:id"
+            path='/recipes/:id'
             element={
               <RecipeDetails
                 recipes={recipes}
                 myRecipes={myRecipes}
                 setItems={setItems}
-                setIds={setIds}
-                ids={ids}
               />
             }
           ></Route>
-          <Route exact path="/create" element={<CreateRecipe />}></Route>
-          <Route exact path="/menu" element={<Menu />}></Route>
-          <Route exact path="/weekly_menu" element={<WeeklyMenu />}></Route>
+          <Route path='/create' element={<CreateRecipe />}></Route>
+          <Route path='/menu' element={<Menu />}></Route>
+          <Route path='/weekly_menu' element={<WeeklyMenu />}></Route>
         </Routes>
       </BrowserRouter>
       <ShoppingList items={items} setItems={setItems} />

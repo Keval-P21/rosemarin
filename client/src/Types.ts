@@ -11,6 +11,8 @@ type Recipe = {
   sections:  Section[] | [],
   instructions: Instruction[] | [],
   renditions:  Rendition[] | [],
+  id?: number,
+  id_tasty?: number | null,
 }
 type MyRecipe = {
   title: string,
@@ -19,10 +21,19 @@ type MyRecipe = {
   description: string,
   Ingredients: Ingredient[] | [],
   Instructions: Instruction[] | [],
+  id?: number,
+  id_tasty?: number | null,
 }
+ type Ids = {
+  id: number,
+  id_tasty: number | null,
+ }
+
+ type AuthType = {
+  authenticated: boolean
+ }
 
 
-
-export {Signup, Login, Section, Ingredient, Instruction, Rendition, Recipe, MyRecipe}
+export {Signup, Login, Section, Ingredient, Instruction, Rendition, Recipe, MyRecipe, Ids, AuthType}
 
 
