@@ -7,8 +7,8 @@ const addItem = async (req: Request, res: Response) => {
             name: req.body.name,
             unit: req.body.unit,
             quantity: req.body.quantity,
-            //todo const userId = req.session.sid;
-            UserId: 1
+            userId: req.session.sid
+            // UserId: 1
         });
         res.status(201).send(result);
     } catch (err) {
@@ -25,8 +25,8 @@ const updateItem = async (req: Request, res: Response) => {
             name: req.body.name,
             unit: req.body.unit,
             quantity: req.body.quantity,
-            // todo const userId = req.session.sid;
-            UserId: 1
+            userId: req.session.sid,
+            // UserId: 1
         });
         res.status(200).send({"message": "Item has been successfully updated"});
     } catch (err) {

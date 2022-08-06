@@ -17,7 +17,7 @@ import LoginPage from './components/Login';
 import SignupPage from './components/Signup';
 import Logout from './components/Logout';
 import { Recipe, MyRecipe, Ids } from './Types';
-import auth from './Utils/auth.js';
+import auth from './Utils/auth';
 import apiUserService from './Utils/apiUserService';
 const BASE_URL = 'http://localhost:3001';
 
