@@ -9,7 +9,7 @@ const authMiddleware = async (req, res, next) => {
       next();
     } else {
       res.status(403);
-      res.send('Not authorized');
+      res.send({ message: 'Not authorized' });
     }
   } catch (error) {
     console.log(error);

@@ -30,8 +30,9 @@ function SignupComponent(props) {
     e.preventDefault();
     const { name, email, password } = signupState;
     const user = { name, email, password };
-    const res = await apiUserService.register(user);
 
+
+    const res = await apiUserService.register(user);
     if (res.error) {
       setErrorMessage('Account already exists. Please try again.');
       setSignupState(initialState);
@@ -43,27 +44,7 @@ function SignupComponent(props) {
       auth.login(() => navigate('/home'));
     }
   };
-  // const handleSubmit=(e)=>{
-  //     e.preventDefault();
-  //     createAccount()
-  // }
-
-  //handle Signup API Integration here
-  // const createAccount=()=>{
-  //     apiUserService.register(signupState)
-  //         .then(res => {
-  //             if(!res) {
-  //                 setErrorMessage('Account already exists. Please try again.');
-  //                 setSignupState(initialState);
-  //             } else {
-  //                 // This sets isAuthenticated = true and redirects to profile
-  //                 props.setIsAuthenticated(true);
-  //                 // navigate("/home");
-  //                 auth.login(() => navigate('/home'));
-  //             }
-  //         })
-  //         .catch(err => console.log(err))
-  // };
+  
 
   const validateForm = () => {
     return !signupState.email || !signupState.password || !signupState.name;

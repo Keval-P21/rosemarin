@@ -18,7 +18,7 @@ const createUser = async (req: Request, res: Response) => {
           });
           
           req.session.sid = result.id;
-          res.status(201).send('Success');
+          res.status(201).send({message: 'Success'});
       } else {
           res.status(400).send({error: 'error', message:'Account already exists.'});
       }
@@ -57,7 +57,7 @@ const profileUser = async (req: Request, res: Response) => {
 
 const logoutUser = (req: Request, res: Response) => {
   req.session.destroy((e) => {
-    if (e) res.status(500).send('Something went wrong');
+    if (e) res.status(500).send({message: 'Something went wrong'});
     else {
       res.clearCookie('sid');
       res.sendStatus(200);
