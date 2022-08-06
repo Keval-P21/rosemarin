@@ -52,7 +52,7 @@ const RecipeDetails = ({recipes, myRecipes, items, setItems}) => {
     return (
         <>
         <div className="h-[300px] flex justify-between items-center">
-            <div className="bg-top-img3 w-full h-full bg-auto bg-no-repeat bg-center"></div>
+            <div className="bg-top-img3 w-full h-full bg-no-repeat bg-center bg-cover"></div>
         </div>
         <div className="bg-base-100 shadow-xl max-w-screen-xl m-auto my-20 prose lg:prose-xl">
             <h2 className="card-title font-rufina-bold block text-center">{recipe ? recipe.name : myRecipe.title}</h2>
