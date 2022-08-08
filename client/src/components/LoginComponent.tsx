@@ -16,7 +16,7 @@ const initialState: Login = {
 
 // fields.forEach(field=>fieldsState[field.id]='');
 
-function LoginComponent(props) {
+function LoginComponent({ setIsAuthenticated }) {
   const [loginState, setLoginState] = useState(initialState);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -30,13 +30,17 @@ function LoginComponent(props) {
     e.preventDefault();
     const { email, password } = loginState;
     const user = { email, password };
+    console.log('before api call', user);
     const res = await apiUserService.login(user);
+    // const res = { email: 'test@gmail.com', password: 'password' };
+    console.log(res);
     if (res.error) {
       setErrorMessage('Incorrect login information.');
       setLoginState(initialState);
     } else {
+      console.log('Happy path', res);
       // This sets isAuthenticated = true and redirects to profile
-      props.setIsAuthenticated(true);
+      setIsAuthenticated(true);
       auth.login(() => navigate('/home'));
     }
   };

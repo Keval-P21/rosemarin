@@ -4,7 +4,7 @@ import './App.css';
 import Navbar from './components/Navbar';
 import RecipesList from './components/RecipesList';
 import { getRandomRecipe } from './Utils/apiService';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import MyRecipesList from './components/MyRecipesList';
 import CreateRecipe from './components/CreateRecipe';
 import ShoppingList from './components/ShoppingList';
@@ -87,62 +87,61 @@ function App() {
 
   return (
     <div className="font-oxy-regular">
-      <BrowserRouter>
-        <Navbar isAuthenticated={isAuthenticated}></Navbar>
-        <Routes>
-          <Route
-            path="/"
-            element={<LoginPage setIsAuthenticated={setIsAuthenticated} />}
-          ></Route>
-          <Route
-            path="/signup"
-            element={<SignupPage setIsAuthenticated={setIsAuthenticated} />}
-          ></Route>
-          <Route
-            path="/logout"
-            element={<Logout setIsAuthenticated={setIsAuthenticated} />}
-          />
+      <Navbar isAuthenticated={isAuthenticated}></Navbar>
+      <Routes>
+        <Route
+          path="/"
+          element={<LoginPage setIsAuthenticated={setIsAuthenticated} />}
+        ></Route>
+        <Route
+          path="/signup"
+          element={<SignupPage setIsAuthenticated={setIsAuthenticated} />}
+        ></Route>
+        <Route
+          path="/logout"
+          element={<Logout setIsAuthenticated={setIsAuthenticated} />}
+        />
 
-          <Route
-            path="/home"
-            element={
-              <RecipesList
-                setRecipes={setRecipes}
-                recipes={recipes}
-                setIds={setIds}
-                ids={ids}
-                isAuthenticated={isAuthenticated}
-              />
-            }
-          ></Route>
-          <Route
-            path="/my_recipes"
-            element={
-              <MyRecipesList
-                myRecipes={myRecipes}
-                setMyRecipes={setMyRecipes}
-                setIds={setIds}
-                ids={ids}
-                setRecipes={setRecipes}
-                isAuthenticated={isAuthenticated}
-              />
-            }
-          ></Route>
-          <Route
-            path="/recipes/:id"
-            element={
-              <RecipeDetails
-                recipes={recipes}
-                myRecipes={myRecipes}
-                setItems={setItems}
-              />
-            }
-          ></Route>
-          <Route path="/create" element={<CreateRecipe />}></Route>
-          <Route path="/menu" element={<Menu />}></Route>
-          <Route path="/weekly_menu" element={<WeeklyMenu />}></Route>
-        </Routes>
-      </BrowserRouter>
+        <Route
+          path="/home"
+          element={
+            <RecipesList
+              setRecipes={setRecipes}
+              recipes={recipes}
+              setIds={setIds}
+              ids={ids}
+              isAuthenticated={isAuthenticated}
+            />
+          }
+        ></Route>
+        <Route
+          path="/my_recipes"
+          element={
+            <MyRecipesList
+              myRecipes={myRecipes}
+              setMyRecipes={setMyRecipes}
+              setIds={setIds}
+              ids={ids}
+              setRecipes={setRecipes}
+              isAuthenticated={isAuthenticated}
+            />
+          }
+        ></Route>
+        <Route
+          path="/recipes/:id"
+          element={
+            <RecipeDetails
+              recipes={recipes}
+              myRecipes={myRecipes}
+              setItems={setItems}
+            />
+          }
+        ></Route>
+        <Route path="/create" element={<CreateRecipe />}></Route>
+        <Route path="/menu" element={<Menu />}></Route>
+        <Route path="/weekly_menu" element={<WeeklyMenu />}></Route>
+      </Routes>
+
       {isAuthenticated && <ShoppingList items={items} setItems={setItems} />}
     </div>
   );
