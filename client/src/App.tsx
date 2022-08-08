@@ -16,7 +16,7 @@ import { getMyShoppingList } from './Utils/apiDBServiceShoppingList';
 import LoginPage from './components/Login';
 import SignupPage from './components/Signup';
 import Logout from './components/Logout';
-import { Recipe, MyRecipe, Ids } from './Types';
+import { Recipe, MyRecipe, Ids, Item } from './Types';
 import auth from './Utils/auth';
 import apiUserService from './Utils/apiUserService';
 const BASE_URL = 'http://localhost:3001';
@@ -25,7 +25,7 @@ function App() {
   const [recipes, setRecipes] = useState([] as Recipe[] | []);
   const [myRecipes, setMyRecipes] = useState([] as MyRecipe[] | []);
   const [ids, setIds] = useState([] as Ids[] | []);
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState([] as Item[] | []);
   const initialState = auth.isAuthenticated();
   const [isAuthenticated, setIsAuthenticated] = useState(initialState);
 
@@ -50,14 +50,15 @@ function App() {
       console.log(error);
     }
   }, []);
-  
 
   useEffect(() => {
-    getMyShoppingList()
-      // .then(recipes => console.log(recipes))
-      .then((itemsSL) => setItems(itemsSL))
-      .catch((err) => console.log.bind(err));
-  }, []);
+    if (isAuthenticated) {
+      getMyShoppingList()
+        // .then(recipes => console.log(recipes))
+        .then((itemsSL) => setItems([...items, itemsSL]))
+        .catch((err) => console.log.bind(err));
+    }
+  }, [isAuthenticated]);
 
   useEffect(() => {
     // getRandomRecipe()
@@ -68,49 +69,53 @@ function App() {
   }, []);
 
   useEffect(() => {
-    getMyRecipes()
-      .then((recipes) =>
-        recipes.map((el) =>
-          setIds((prev) => {
-            let id = el.id;
-            let id_tasty = el.id_tasty;
-            const filtered = prev.filter(
-              (e: MyRecipe) => e.id_tasty !== el.id_tasty
-            );
-            return [...filtered, { id, id_tasty }];
-          })
+    if (isAuthenticated) {
+      getMyRecipes()
+        .then((recipes) =>
+          recipes.map((el) =>
+            setIds((prev) => {
+              let id = el.id;
+              let id_tasty = el.id_tasty;
+              const filtered = prev.filter(
+                (e: MyRecipe) => e.id_tasty !== el.id_tasty
+              );
+              return [...filtered, { id, id_tasty }];
+            })
+          )
         )
-      )
-      .catch((err) => console.log.bind(err));
-  }, []);
+        .catch((err) => console.log.bind(err));
+    }
+  }, [isAuthenticated]);
 
   useEffect(() => {
-    getMyRecipes()
-      // .then(recipes => console.log(recipes))
-      .then((recipes) => setMyRecipes(recipes))
-      .catch((err) => console.log.bind(err));
-  }, [ids]);
+    if (isAuthenticated) {
+      getMyRecipes()
+        // .then(recipes => console.log(recipes))
+        .then((recipes) => setMyRecipes(recipes))
+        .catch((err) => console.log.bind(err));
+    }
+  }, [ids, isAuthenticated]);
 
   return (
-    <div className='font-oxy-regular'>
+    <div className="font-oxy-regular">
       <BrowserRouter>
         <Navbar isAuthenticated={isAuthenticated}></Navbar>
         <Routes>
           <Route
-            path='/'
+            path="/"
             element={<LoginPage setIsAuthenticated={setIsAuthenticated} />}
           ></Route>
           <Route
-            path='/signup'
+            path="/signup"
             element={<SignupPage setIsAuthenticated={setIsAuthenticated} />}
           ></Route>
           <Route
-            path='/logout'
+            path="/logout"
             element={<Logout setIsAuthenticated={setIsAuthenticated} />}
           />
 
           <Route
-            path='/home'
+            path="/home"
             element={
               <RecipesList
                 setRecipes={setRecipes}
@@ -121,7 +126,7 @@ function App() {
             }
           ></Route>
           <Route
-            path='/my_recipes'
+            path="/my_recipes"
             element={
               <MyRecipesList
                 myRecipes={myRecipes}
@@ -133,7 +138,7 @@ function App() {
             }
           ></Route>
           <Route
-            path='/recipes/:id'
+            path="/recipes/:id"
             element={
               <RecipeDetails
                 recipes={recipes}
@@ -142,12 +147,12 @@ function App() {
               />
             }
           ></Route>
-          <Route path='/create' element={<CreateRecipe />}></Route>
-          <Route path='/menu' element={<Menu />}></Route>
-          <Route path='/weekly_menu' element={<WeeklyMenu />}></Route>
+          <Route path="/create" element={<CreateRecipe />}></Route>
+          <Route path="/menu" element={<Menu />}></Route>
+          <Route path="/weekly_menu" element={<WeeklyMenu />}></Route>
         </Routes>
       </BrowserRouter>
-      <ShoppingList items={items} setItems={setItems} />
+      {isAuthenticated && <ShoppingList items={items} setItems={setItems} />}
     </div>
   );
 }
