@@ -29,18 +29,6 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(initialState);
 
   useEffect(() => {
-    // try {
-
-    //   // const data = async function () {
-    //   //   let res = await fetch(`${BASE_URL}/login`);
-    //   //   res = await res.json();
-    //   //   console.log(res);
-    //   //   return res;
-    //   // };
-    //   // console.log('data', data());
-    // } catch (error) {
-    //   console.log(error);
-    // }
     try {
       apiUserService
         .profile()
@@ -58,7 +46,7 @@ function App() {
         .then((itemsSL) => setItems([...items, itemsSL]))
         .catch((err) => console.log(err));
     }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);
 
   useEffect(() => {
