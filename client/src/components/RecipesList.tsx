@@ -3,7 +3,7 @@ import Recipe from './Recipe';
 import TopSection from './TopSection';
 import SearchForm from './SearchForm';
 
-const RecipesList = ({ recipes, setIds, ids, setRecipes }) => {
+const RecipesList = ({ recipes, setIds, ids, setRecipes, isAuthenticated }) => {
   return (
     <>
       <TopSection></TopSection>
@@ -19,6 +19,7 @@ const RecipesList = ({ recipes, setIds, ids, setRecipes }) => {
               }
               setIds={setIds}
               ids={ids}
+              isAuthenticated={isAuthenticated}
             ></Recipe>
           ) : i === 6 || i % 10 === 6 ? (
             <Recipe
@@ -29,6 +30,7 @@ const RecipesList = ({ recipes, setIds, ids, setRecipes }) => {
               }
               setIds={setIds}
               ids={ids}
+              isAuthenticated={isAuthenticated}
             ></Recipe>
           ) : (
             <Recipe
@@ -37,6 +39,7 @@ const RecipesList = ({ recipes, setIds, ids, setRecipes }) => {
               className={'vertical card bg-base-100 shadow-xl'}
               setIds={setIds}
               ids={ids}
+              isAuthenticated={isAuthenticated}
             ></Recipe>
           )
         )}

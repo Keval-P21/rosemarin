@@ -9,7 +9,6 @@ const addItem = async (req: Request, res: Response) => {
       unit: req.body.unit,
       quantity: req.body.quantity,
       userId: req.session.sid,
-      // UserId: 1
     });
     res.status(201).send(result);
   } catch (err) {
@@ -27,7 +26,6 @@ const updateItem = async (req: Request, res: Response) => {
       unit: req.body.unit,
       quantity: req.body.quantity,
       userId: req.session.sid,
-      // UserId: 1
     });
     res.status(200).send({ message: 'Item has been successfully updated' });
   } catch (err) {
@@ -49,9 +47,7 @@ const removeItem = async (req: Request, res: Response) => {
 
 const getAllItems = async (req: Request, res: Response) => {
   try {
-    //todo const userId = req.session.sid;
     const userId = req.session.sid;
-    // console.log({ userId });
     const allItems = await ShoppingListItem.findAll({
       where: { userId: userId },
     });

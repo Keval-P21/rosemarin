@@ -16,6 +16,7 @@ export const getMyRecipes = () => {
 export const postRecipe = (recipe) => {
   return fetch(baseDBUrl, {
     method: 'POST',
+    credentials: 'include',
     headers: { 'Content-type': 'application/json' },
     body: JSON.stringify(recipe),
   })
@@ -26,6 +27,7 @@ export const postRecipe = (recipe) => {
 export const deleteRecipe = (id) => {
   return fetch(baseDBUrl, {
     method: 'DELETE',
+    credentials: 'include',
     headers: { 'Content-type': 'application/json' },
     body: JSON.stringify(id),
   })

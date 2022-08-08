@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import TopSection from './TopSection';
 import SearchForm from './SearchForm';
 import Recipe from './Recipe';
 import { getMyRecipes } from '../Utils/apiDBService';
-import recipe from './Recipe';
 
 const MyRecipesList = ({
   myRecipes,
@@ -12,6 +11,7 @@ const MyRecipesList = ({
   setIds,
   ids,
   setRecipes,
+  isAuthenticated,
 }) => {
   useEffect(() => {
     getMyRecipes()
@@ -39,6 +39,7 @@ const MyRecipesList = ({
               }
               setIds={setIds}
               ids={ids}
+              isAuthenticated={isAuthenticated}
             ></Recipe>
           ) : i === 6 ? (
             <Recipe
@@ -49,6 +50,7 @@ const MyRecipesList = ({
               }
               setIds={setIds}
               ids={ids}
+              isAuthenticated={isAuthenticated}
             ></Recipe>
           ) : i > 9 ? null : (
             <Recipe
@@ -57,6 +59,7 @@ const MyRecipesList = ({
               className={'vertical card bg-base-100 shadow-xl'}
               setIds={setIds}
               ids={ids}
+              isAuthenticated={isAuthenticated}
             ></Recipe>
           )
         )}

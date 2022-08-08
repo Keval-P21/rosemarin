@@ -5,12 +5,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { Ingredient } from '../Types';
 import { postRecipe } from '../Utils/apiDBService';
+import { useNavigate } from 'react-router-dom';
 
 function CreateRecipe() {
   const [ingredients, setIngredients] = useState([
     { name: '', quantity: '', unit: '' },
   ]);
   const [instructions, setInstructions] = useState(['']);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,16 +45,17 @@ function CreateRecipe() {
       .then((res) => console.log(res))
       .catch((error) => console.log(error));
     e.target.reset();
+    navigate('/my_recipes');
   };
 
   const addHandlerIngredient = () => {
     setIngredients([...ingredients, { name: '', quantity: '', unit: '' }]);
   };
 
-  const delHandlerIngredient = (index) => {
+  const delHandlerIngredient = () => {
     if (ingredients.length === 1) return;
     const rows = [...ingredients];
-    rows.splice(index, 1);
+    rows.splice(-1, 1);
     setIngredients(rows);
   };
 
@@ -60,10 +63,10 @@ function CreateRecipe() {
     setInstructions([...instructions, '']);
   };
 
-  const delHandlerInstruction = (index) => {
+  const delHandlerInstruction = () => {
     if (instructions.length === 1) return;
     const rows = [...instructions];
-    rows.splice(index, 1);
+    rows.splice(-1, 1);
     setInstructions(rows);
   };
 

@@ -18,7 +18,6 @@ const createRecipe = async (req: Request, res: Response) => {
       total_time: req.body.total_time,
       id_tasty: req.body.id_tasty,
       userId: req.session.sid,
-      // UserId: 1
     });
 
     ingredients.map((ingredient: Ingredient) => {
@@ -32,8 +31,8 @@ const createRecipe = async (req: Request, res: Response) => {
 
     instructions.map((instruction: Instruction) => {
       InstructionModel.create({
-        text: instruction.text,
-        temperature: instruction.temperature,
+        text: instruction,
+        // temperature: instruction.temperature,
         RecipeId: newRecipe.id,
       });
     });
@@ -61,8 +60,7 @@ const updateRecipe = async (req: Request, res: Response) => {
       img_alt_text: req.body.img_alt_text,
       total_time: req.body.total_time,
       id_tasty: req.body.id_tasty,
-      //todo const userId = req.session.sid;
-      UserId: 1,
+      userId: req.session.sid,
     });
 
     ingredients.map((ingredient: Ingredient) => {
@@ -76,8 +74,8 @@ const updateRecipe = async (req: Request, res: Response) => {
 
     instructions.map((instruction: Instruction) => {
       InstructionModel.create({
-        text: instruction.text,
-        temperature: instruction.temperature,
+        text: instruction,
+        // temperature: instruction.temperature,
         RecipeId: updatedRecipe.id,
       });
     });
@@ -112,7 +110,6 @@ const removeRecipe = async (req: Request, res: Response) => {
 
 const getAllRecipes = async (req: Request, res: Response) => {
   try {
-    //todo const userId = req.session.sid;
     const userId = req.session.sid;
     const allRecipes = await Recipe.findAll({
       where: { userId: userId },

@@ -122,6 +122,7 @@ function App() {
                 recipes={recipes}
                 setIds={setIds}
                 ids={ids}
+                isAuthenticated={isAuthenticated}
               />
             }
           ></Route>
@@ -134,6 +135,7 @@ function App() {
                 setIds={setIds}
                 ids={ids}
                 setRecipes={setRecipes}
+                isAuthenticated={isAuthenticated}
               />
             }
           ></Route>

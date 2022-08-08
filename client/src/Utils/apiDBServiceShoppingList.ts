@@ -13,6 +13,7 @@ export const getMyShoppingList = () => {
 export const postItem = (recipe) => {
   return fetch(baseDBUrl, {
     method: 'POST',
+    credentials: 'include',
     headers: { 'Content-type': 'application/json' },
     body: JSON.stringify(recipe),
   })
@@ -24,6 +25,7 @@ export const deleteItem = (id) => {
   console.log(id);
   return fetch(baseDBUrl, {
     method: 'DELETE',
+    credentials: 'include',
     headers: { 'Content-type': 'application/json' },
     body: JSON.stringify(id),
   })

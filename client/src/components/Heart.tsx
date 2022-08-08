@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { deleteRecipe, postRecipe } from '../Utils/apiDBService';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
-const Heart = ({ recipe, setIds, ids }) => {
+const Heart = ({ recipe, setIds, ids, isAuthenticated }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [currentId, setCurrentId] = useState(0);
 
@@ -17,7 +17,7 @@ const Heart = ({ recipe, setIds, ids }) => {
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ids]);
+  }, [ids, isAuthenticated]);
 
   const isFavoriteHandler = () => {
     setIsFavorite(() => !isFavorite);

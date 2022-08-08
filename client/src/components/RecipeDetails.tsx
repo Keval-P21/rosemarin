@@ -34,14 +34,12 @@ const RecipeDetails = ({ recipes, myRecipes, setItems }) => {
   useEffect(() => {
     const result = recipes.find((res) => +id! === res.id);
     setRecipe(result);
-    console.log('recipe result', result);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recipes]);
 
   useEffect(() => {
     const result = myRecipes.find((res) => +id! === res.id);
     setMyRecipe(result);
-    console.log('myRecipe result', result);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [myRecipes]);
 
