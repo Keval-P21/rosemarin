@@ -24,8 +24,8 @@ type MyRecipe = {
   img_url?: string;
   img_data?: string;
   description: string;
-  Ingredients: Ingredient[] | [];
-  Instructions: Instruction[] | [];
+  Ingredients: Ingredient[];
+  Instructions: Instruction[];
   id?: number;
   id_tasty?: number | null;
 };

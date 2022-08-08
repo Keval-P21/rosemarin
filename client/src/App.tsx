@@ -45,7 +45,8 @@ function App() {
     try {
       apiUserService
         .profile()
-        .then((data) => setIsAuthenticated(data.isAuthenticated));
+        .then((data) => setIsAuthenticated(data.isAuthenticated))
+        .catch((err) => console.log(err));
     } catch (error) {
       console.log(error);
     }
@@ -56,7 +57,7 @@ function App() {
       getMyShoppingList()
         // .then(recipes => console.log(recipes))
         .then((itemsSL) => setItems([...items, itemsSL]))
-        .catch((err) => console.log.bind(err));
+        .catch((err) => console.log(err));
     }
   }, [isAuthenticated]);
 
@@ -74,8 +75,8 @@ function App() {
         .then((recipes) =>
           recipes.map((el) =>
             setIds((prev) => {
-              let id = el.id;
-              let id_tasty = el.id_tasty;
+              const id = el.id;
+              const id_tasty = el.id_tasty;
               const filtered = prev.filter(
                 (e: MyRecipe) => e.id_tasty !== el.id_tasty
               );
