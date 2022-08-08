@@ -18,6 +18,7 @@ const MyRecipesList = ({
       // .then(recipes => console.log(recipes))
       .then((recipes) => setMyRecipes(recipes))
       .catch((err) => console.log.bind(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ids]);
 
   return (

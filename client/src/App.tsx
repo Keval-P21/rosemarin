@@ -19,7 +19,6 @@ import Logout from './components/Logout';
 import { Recipe, MyRecipe, Ids, Item } from './Types';
 import auth from './Utils/auth';
 import apiUserService from './Utils/apiUserService';
-const BASE_URL = 'http://localhost:3001';
 
 function App() {
   const [recipes, setRecipes] = useState([] as Recipe[] | []);
@@ -59,6 +58,7 @@ function App() {
         .then((itemsSL) => setItems([...items, itemsSL]))
         .catch((err) => console.log(err));
     }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);
 
   useEffect(() => {

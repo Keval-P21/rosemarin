@@ -3,15 +3,16 @@ import { useState } from 'react';
 import TopSection from './TopSection';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { Ingredient } from '../Types';
+import { Ingredient, Instruction } from '../Types';
 import { postRecipe } from '../Utils/apiDBService';
 import { useNavigate } from 'react-router-dom';
+import { MyRecipe } from '../Types';
 
 function CreateRecipe() {
   const [ingredients, setIngredients] = useState([
     { name: '', quantity: '', unit: '' },
-  ]);
-  const [instructions, setInstructions] = useState(['']);
+  ] as Ingredient[]);
+  const [instructions, setInstructions] = useState([''] as Instruction[]);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -32,7 +33,7 @@ function CreateRecipe() {
       []
     );
 
-    const data = {
+    const data: MyRecipe = {
       title: e.target.title.value,
       description: e.target.description.value,
       img_url: e.target.url.value || null,
@@ -60,7 +61,7 @@ function CreateRecipe() {
   };
 
   const addHandlerInstruction = () => {
-    setInstructions([...instructions, '']);
+    setInstructions([...instructions, '' as Instruction]);
   };
 
   const delHandlerInstruction = () => {
@@ -146,7 +147,7 @@ function CreateRecipe() {
                   value={quantity}
                   name="quantity"
                   placeholder="quantity.."
-                  className="input input-bordered w-1/4 mr-3 mr-3 hover:bg-slate-50"
+                  className="input input-bordered w-1/4 mr-3 hover:bg-slate-50"
                   onChange={(event) => handleChange(i, event)}
                 />
                 <input
@@ -177,13 +178,13 @@ function CreateRecipe() {
               onClick={delHandlerInstruction}
             />
           </label>
-          {instructions.map((data, i) => {
+          {instructions.map((instruction, i) => {
             return (
               <textarea
                 key={i}
                 name="instruction"
                 id="instruction"
-                value={data}
+                value={instruction as string}
                 placeholder="Type here instruction.."
                 className="textarea input-bordered w-full hover:bg-slate-50"
                 onChange={(event) => handleChangeInstructions(i, event)}

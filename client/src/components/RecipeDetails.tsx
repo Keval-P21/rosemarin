@@ -25,8 +25,8 @@ const RecipeDetails = ({ recipes, myRecipes, setItems }) => {
   const [myRecipe, setMyRecipe] = useState({
     title: '',
     description: '',
-    Ingredients: [] as Ingredient[] | [],
-    Instructions: [] as Instruction[] | [],
+    ingredients: [] as Ingredient[] | [],
+    instructions: [] as Instruction[] | [],
   } as MyRecipe);
 
   const { id } = useParams();
@@ -138,7 +138,7 @@ const RecipeDetails = ({ recipes, myRecipes, setItems }) => {
                         </tr>
                       ));
                     })
-                  : myRecipe.Ingredients.map((ingr, i) => (
+                  : myRecipe.ingredients.map((ingr, i) => (
                       <tr key={i}>
                         <th>{ingr.name}</th>
                         <td>{ingr.quantity}</td>
@@ -168,7 +168,7 @@ const RecipeDetails = ({ recipes, myRecipes, setItems }) => {
                   {instr.display_text}
                 </p>
               ))
-            : myRecipe.Instructions?.map((instr, i) => (
+            : myRecipe.instructions?.map((instr, i) => (
                 <p className="w-5/6 m-auto" key={i}>
                   {instr.text}
                 </p>
