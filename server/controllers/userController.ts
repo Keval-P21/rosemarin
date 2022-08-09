@@ -1,7 +1,8 @@
 //@ts-ignore:next-line
+// const Express= require('express');
 import { Request, Response } from 'express';
-// const { Request, Response } = require('express');
 const User = require('../models/User');
+// const { Request, Response } = require('express');
 const bcrypt = require('bcryptjs');
 
 const createUser = async (req: Request, res: Response) => {
@@ -18,7 +19,7 @@ const createUser = async (req: Request, res: Response) => {
         password: password,
       });
 
-      req.session.sid = result.id;
+      (req.session as any).sid = result.id;
       res.status(201).send({ message: 'Success' });
     } else {
       res
@@ -39,7 +40,7 @@ const loginUser = async (req: Request, res: Response) => {
     const user = await User.findOne({ where: { email: req.body.email } });
     const validatedPass = await bcrypt.compare(password, user.password);
     if (!validatedPass) throw new Error();
-    req.session.sid = user.id;
+    (req.session as any).sid = user.id;
     res.status(200).send(user);
   } catch (error) {
     res
@@ -50,8 +51,10 @@ const loginUser = async (req: Request, res: Response) => {
 
 const profileUser = async (req: Request, res: Response) => {
   try {
-    if (req.session.sid) {
-      res.status(200).send({ isAuthenticated: true, sid: req.session.sid });
+    if ((req.session as any).sid) {
+      res
+        .status(200)
+        .send({ isAuthenticated: true, sid: (req.session as any).sid });
     }
   } catch (err) {
     res.status(500);
@@ -60,7 +63,7 @@ const profileUser = async (req: Request, res: Response) => {
 };
 
 const logoutUser = (req: Request, res: Response) => {
-  req.session.destroy((e) => {
+  req.session.destroy((e: any) => {
     if (e) res.status(500).send({ message: 'Something went wrong' });
     else {
       res.clearCookie('sid');

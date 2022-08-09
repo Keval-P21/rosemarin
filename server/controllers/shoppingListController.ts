@@ -1,5 +1,6 @@
 const ShoppingListItem = require('../models/ShoppingListItem');
 import { Request, Response } from 'express';
+// const { Request, Response } = require('express');
 
 const addItem = async (req: Request, res: Response) => {
   console.log(req.session.sid);
