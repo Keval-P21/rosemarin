@@ -13,6 +13,7 @@ const initialState: Signup = {
   name: '',
   email: '',
   password: '',
+  confirmPassword: '',
 };
 
 // fields.forEach(field => fieldsState[field.id]='');
@@ -28,31 +29,33 @@ function SignupComponent(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { name, email, password } = signupState;
+    const { name, email, password, confirmPassword } = signupState;
     const user = { name, email, password };
 
+    if (password !== confirmPassword) {
+      setErrorMessage('Passwords do not match. Please try again.');
+      return;
+    }
 
     const res = await apiUserService.register(user);
     if (res.error) {
       setErrorMessage('Account already exists. Please try again.');
       setSignupState(initialState);
-      e.target.reset()
     } else {
       // This sets isAuthenticated = true and redirects to profile
       props.setIsAuthenticated(true);
-    //   navigate("/home");
+      //   navigate("/home");
       auth.login(() => navigate('/home'));
     }
   };
-  
 
   const validateForm = () => {
     return !signupState.email || !signupState.password || !signupState.name;
   };
 
   return (
-    <form className='mt-8 space-y-6' onSubmit={handleSubmit}>
-      <div className=''>
+    <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+      <div className="">
         {fields.map((field) => (
           <Input
             key={field.id}
@@ -69,11 +72,11 @@ function SignupComponent(props) {
         ))}
         <FormAction
           handleSubmit={handleSubmit}
-          text='Signup'
+          text="Signup"
           validateForm={validateForm}
         />
       </div>
-      <div className='alert-error'>{errorMessage}</div>
+      <div className="alert-error">{errorMessage}</div>
     </form>
   );
 }
