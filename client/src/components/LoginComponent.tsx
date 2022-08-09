@@ -69,7 +69,7 @@ function LoginComponent({ setIsAuthenticated }) {
         text="Login"
         validateForm={validateForm}
       />
-      <div data-testid='errorMessage' className="alert-error">{errorMessage}</div>
+      <div data-testid='loginErrorMessage' className="alert-error">{errorMessage}</div>
     </form>
   );
 }

@@ -13,6 +13,7 @@ function CreateRecipe() {
     { name: '', quantity: '', unit: '' },
   ] as Ingredient[]);
   const [instructions, setInstructions] = useState([''] as Instruction[]);
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -43,10 +44,12 @@ function CreateRecipe() {
       instructions: instructions,
     };
     postRecipe(data)
-      .then((res) => console.log(res))
-      .catch((error) => console.log(error));
-    e.target.reset();
-    navigate('/my_recipes');
+      .then((res) => {
+        e.target.reset();
+        navigate('/my_recipes')})
+      .catch((error) => {console.log(error);
+        setErrorMessage('Unable to add recipe.');});
+    
   };
 
   const addHandlerIngredient = () => {
@@ -220,6 +223,7 @@ function CreateRecipe() {
         <button type="submit" className="btn btn-neutral font-rufina-regular">
           Submit
         </button>
+        <div className="alert-error">{errorMessage}</div>
       </form>
     </>
   );

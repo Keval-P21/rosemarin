@@ -18,7 +18,7 @@ const initialState: Signup = {
 
 // fields.forEach(field => fieldsState[field.id]='');
 
-function SignupComponent(props) {
+function SignupComponent({setIsAuthenticated}) {
   const [signupState, setSignupState] = useState(initialState);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -43,8 +43,7 @@ function SignupComponent(props) {
       setSignupState(initialState);
     } else {
       // This sets isAuthenticated = true and redirects to profile
-      props.setIsAuthenticated(true);
-      //   navigate("/home");
+      setIsAuthenticated(true);
       auth.login(() => navigate('/home'));
     }
   };
@@ -76,7 +75,7 @@ function SignupComponent(props) {
           validateForm={validateForm}
         />
       </div>
-      <div className="alert-error">{errorMessage}</div>
+      <div data-testid='signupComponentErrorMessage' className="alert-error">{errorMessage}</div>
     </form>
   );
 }

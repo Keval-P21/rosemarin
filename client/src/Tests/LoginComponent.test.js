@@ -116,9 +116,11 @@ describe('Login function', () => {
 
     userEvent.click(loginButton);
 
-    const errorMessage = screen.getByTestId('errorMessage');
+    const loginErrorMessage = screen.getByTestId('loginErrorMessage');
     await waitFor(() => {
-      expect(errorMessage).toHaveTextContent('Incorrect login information.');
+      expect(loginErrorMessage).toHaveTextContent(
+        'Incorrect login information.'
+      );
     });
   });
 
