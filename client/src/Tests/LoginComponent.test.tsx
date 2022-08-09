@@ -37,14 +37,12 @@ describe('Login function', () => {
 
   // Check email and password are correctly passed as arguments to the api call
   it('should pass email and password as arguments to the login api call', async () => {
-
     const setIsAuthenticated = jest.fn();
     render(
       <BrowserRouter>
         <LoginComponent setIsAuthenticated={setIsAuthenticated} />
       </BrowserRouter>
     );
-
 
     const emailInput = screen.getByPlaceholderText('Email address');
     const passwordInput = screen.getByPlaceholderText('Password');
