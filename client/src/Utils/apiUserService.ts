@@ -15,22 +15,6 @@ const register = (user) => {
     .catch((err) => console.error(err));
 };
 
-// const login = (user) => {
-//   const options: RequestInit = {
-//     method: 'POST',
-//     body: JSON.stringify(user),
-//     headers: {
-//       'Content-type': 'application/json',
-//     },
-//     credentials: 'include',
-//   };
-//   return fetch(`${BASE_URL}/login`, options)
-//     .then((response) => {
-//       console.log(response);
-//       return response.json();
-//     })
-//     .catch((err) => console.log(err));
-// };
 const login = async (user) => {
   const options: RequestInit = {
     method: 'POST',
