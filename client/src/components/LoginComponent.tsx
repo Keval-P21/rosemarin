@@ -30,16 +30,11 @@ function LoginComponent({ setIsAuthenticated }) {
     e.preventDefault();
     const { email, password } = loginState;
     const user = { email, password };
-    console.log('before api call', user);
     const res = await apiUserService.login(user);
-    // const res = { email: 'test@gmail.com', password: 'password' };
-    console.log(res);
     if (res.error) {
       setErrorMessage('Incorrect login information.');
       setLoginState(initialState);
     } else {
-      console.log('Happy path', res);
-      // This sets isAuthenticated = true and redirects to profile
       setIsAuthenticated(true);
       auth.login(() => navigate('/home'));
     }
@@ -74,7 +69,7 @@ function LoginComponent({ setIsAuthenticated }) {
         text="Login"
         validateForm={validateForm}
       />
-      <div className="alert-error">{errorMessage}</div>
+      <div data-testid='errorMessage' className="alert-error">{errorMessage}</div>
     </form>
   );
 }
