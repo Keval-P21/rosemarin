@@ -1,8 +1,8 @@
-import sequelize  from './index';
+import sequelize from './index';
 const { DataTypes } = require('sequelize');
 const Recipe = require('./Recipe');
 
-const Ingredient = sequelize.define('Ingredient', {
+const Ingredient = sequelize.define('ingredient', {
   name: {
     type: DataTypes.STRING,
     allowNull: false,

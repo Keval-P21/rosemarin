@@ -113,7 +113,7 @@ const getAllRecipes = async (req: Request, res: Response) => {
     const userId = req.session.sid;
     const allRecipes = await Recipe.findAll({
       where: { userId: userId },
-      include: ['Instructions', 'Ingredients'],
+      include: ['instructions', 'ingredients'],
     });
     res.status(200).send(allRecipes);
   } catch (err) {

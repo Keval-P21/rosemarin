@@ -4,7 +4,6 @@ const bcrypt = require('bcryptjs');
 
 const createUser = async (req: Request, res: Response) => {
   try {
-    // if(!req.session){throw new Error('missing session')}
     const pass = req.body.password;
     const salt = bcrypt.genSaltSync(10);
     const password = bcrypt.hashSync(pass, salt);
@@ -34,7 +33,6 @@ const createUser = async (req: Request, res: Response) => {
 
 const loginUser = async (req: Request, res: Response) => {
   try {
-    console.log(req.body);
     const { email, password } = req.body;
     const user = await User.findOne({ where: { email: req.body.email } });
     const validatedPass = await bcrypt.compare(password, user.password);

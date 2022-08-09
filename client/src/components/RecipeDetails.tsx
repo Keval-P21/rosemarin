@@ -36,7 +36,7 @@ const RecipeDetails = ({ recipes, myRecipes, setItems }) => {
     setRecipe(result);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recipes]);
-
+  
   useEffect(() => {
     const result = myRecipes.find((res) => +id! === res.id);
     setMyRecipe(result);
