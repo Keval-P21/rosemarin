@@ -1,5 +1,3 @@
-import {AuthType} from '../Types'
-
 class Auth {
   constructor() {
     this.authenticated = false;
