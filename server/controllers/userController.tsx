@@ -1,4 +1,6 @@
+//@ts-ignore:next-line
 import { Request, Response } from 'express';
+// const { Request, Response } = require('express');
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 
