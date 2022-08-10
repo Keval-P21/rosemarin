@@ -14,8 +14,8 @@ type Recipe = {
   thumbnail_url: string;
   description: string;
   sections: Section[] | [];
-  instructions: Instruction[] | [];
-  renditions: Rendition[] | [];
+  instructions: Instruction[];
+  renditions: Rendition[];
   id?: number;
   id_tasty?: number | null;
 };

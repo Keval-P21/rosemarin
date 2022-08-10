@@ -20,10 +20,10 @@ import auth from './Utils/auth';
 import apiUserService from './Utils/apiUserService';
 
 function App() {
-  const [recipes, setRecipes] = useState([] as Recipe[] | []);
-  const [myRecipes, setMyRecipes] = useState([] as MyRecipe[] | []);
+  const [recipes, setRecipes] = useState([] as Recipe[]);
+  const [myRecipes, setMyRecipes] = useState([] as MyRecipe[]);
   const [ids, setIds] = useState([] as Ids[] | []);
-  const [items, setItems] = useState([] as Item[] | []);
+  const [items, setItems] = useState([] as Item[]);
   const initialState = auth.isAuthenticated();
   const [isAuthenticated, setIsAuthenticated] = useState(initialState);
   const [errorMessage, setErrorMessage] = useState('');

@@ -15,17 +15,17 @@ export type Recipe = {
   name: string;
   thumbnail_url: string;
   description: string;
-  sections: Section[] | [];
-  instructions: Instruction[] | [];
-  renditions: Rendition[] | [];
+  sections: Section[];
+  instructions: Instruction[];
+  renditions: Rendition[];
 };
 export type MyRecipe = {
   title: string;
   img_url?: string;
   img_data?: string;
   description: string;
-  Ingredients: Ingredient[] | [];
-  Instructions: Instruction[] | [];
+  Ingredients: Ingredient[];
+  Instructions: Instruction[];
   id?: number;
   id_tasty?: number;
 };

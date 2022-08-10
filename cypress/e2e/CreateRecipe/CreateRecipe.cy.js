@@ -26,6 +26,7 @@ describe('Create recipe process', () => {
     const randomName = randRecipeName();
     cy.wait(1000);
     cy.contains('Create Recipe').click();
+
     cy.get('#title').type(`${randomName}`);
     cy.get('#description').type('Cypress tea description');
     cy.get('#name-0').type('Tea');
@@ -39,8 +40,20 @@ describe('Create recipe process', () => {
     cy.get('#addInstruction').click();
     cy.get('#instruction-1').type('Put tea bag in mug and add hot water');
     cy.get('#submit').click();
+
     cy.wait(1000);
-    cy.get('#recipeCard').contains(`${randomName}`).should('exist');
-    cy.get('#recipeCard').contains(`${randomName}`).get('button').click();
+
+    cy.get('#myRecipeList').contains(`${randomName}`).should('exist');
+
+    // cy.get('#myRecipeList')
+    //   .find('#recipeCard')
+    //   .contains(`${randomName}`)
+    //   .get('button')
+    //   .click();
+    cy.contains(`${randomName}`).parent().contains('Details').click();
+    cy.wait(1000);
+    cy.get('#deleteRecipeButton').click();
+    cy.wait(500);
+    cy.get('#confirmDeleteButton').click();
   });
 });

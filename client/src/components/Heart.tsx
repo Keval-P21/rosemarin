@@ -23,7 +23,7 @@ const Heart = ({ recipe, setIds, ids, isAuthenticated, setErrorMessage }) => {
     setIsFavorite(() => !isFavorite);
     if (!isFavorite) {
       const instructions = recipe.instructions.map((el) => {
-        let text = el.display_text;
+        const text = el.display_text;
         return { text };
       });
       const ingredients = recipe.sections.map((el) => {

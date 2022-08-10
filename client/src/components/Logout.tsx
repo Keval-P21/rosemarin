@@ -4,7 +4,7 @@ import apiUserService from '../Utils/apiUserService';
 import auth from '../Utils/auth';
 
 const Logout = ({ setIsAuthenticated, setErrorMessage }) => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const handleClick = () => {
     apiUserService
       .logout()
