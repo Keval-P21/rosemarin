@@ -30,7 +30,7 @@ const MyRecipesList = ({
       <div className="prose lg:prose-xl  m-auto mb-10 text-center">
         <h2 className="m-auto font-rufina-bold ">List of favourite recipes</h2>
       </div>
-      <SearchForm setRecipes={setRecipes}></SearchForm>
+      {/* <SearchForm setRecipes={setRecipes}></SearchForm> */}
 
       <ul
         id="myRecipeList"

@@ -6,20 +6,11 @@ describe('Create recipe process', () => {
     cy.get('button').click();
   });
 
-  // after(() => {
-  //   // cy.get('#logoutButton').click();
-  //   // cy.wait(1000);
-  //   // cy.get('#confirmLogout').click();
-  //   cy.window().then((win) => win.sessionStorage.clear());
-  //   cy.clearCookies();
-  //   cy.clearLocalStorage();
-  // });
-
-  it('Create a recipe and show it in my recipes page', () => {
+  it('Create a recipe and show it in my recipes page, then delete the recipe and return to home', () => {
     function randRecipeName() {
-      var text = '';
-      var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-      for (var i = 0; i < 10; i++)
+      let text = '';
+      const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+      for (let i = 0; i < 10; i++)
         text += possible.charAt(Math.floor(Math.random() * possible.length));
       return text;
     }
@@ -40,16 +31,8 @@ describe('Create recipe process', () => {
     cy.get('#addInstruction').click();
     cy.get('#instruction-1').type('Put tea bag in mug and add hot water');
     cy.get('#submit').click();
-
     cy.wait(1000);
-
     cy.get('#myRecipeList').contains(`${randomName}`).should('exist');
-
-    // cy.get('#myRecipeList')
-    //   .find('#recipeCard')
-    //   .contains(`${randomName}`)
-    //   .get('button')
-    //   .click();
     cy.contains(`${randomName}`).parent().contains('Details').click();
     cy.wait(1000);
     cy.get('#deleteRecipeButton').click();

@@ -9,7 +9,7 @@ const SearchForm = ({ setRecipes }) => {
   function searchHandler(event) {
     event.preventDefault();
     setRecipes(getRandomRecipe(event.target.search.value));
-    navigate('../home', { replace: true });
+    navigate('/home');
   }
 
   return (

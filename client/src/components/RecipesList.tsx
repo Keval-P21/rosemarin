@@ -16,8 +16,8 @@ const RecipesList = ({
   if (!isAuthenticated) navigate('/home');
   return (
     <>
-      <TopSection></TopSection>
-      <SearchForm setRecipes={setRecipes}></SearchForm>
+      <TopSection />
+      {/* <SearchForm setRecipes={setRecipes}></SearchForm> */}
       <ul className="bg-transparent container-grid max-w-7xl mx-auto pr-5 pl-5">
         {recipes.map((recipe, i) =>
           i === 4 || i % 10 === 4 ? (

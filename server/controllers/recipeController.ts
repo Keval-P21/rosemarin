@@ -92,7 +92,6 @@ const updateRecipe = async (req: Request, res: Response) => {
 const removeRecipe = async (req: Request, res: Response) => {
   try {
     const id = req.body.id;
-    console.log({ id });
     const recipe = await Recipe.findByPk(id);
     if (!recipe || !recipe.img_data) {
       await Recipe.destroy({ where: { id: id } });
