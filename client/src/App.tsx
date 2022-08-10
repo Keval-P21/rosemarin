@@ -21,7 +21,7 @@ import apiUserService from './Utils/apiUserService';
 
 function App() {
   const [recipes, setRecipes] = useState([] as Recipe[]);
-  const [myRecipes, setMyRecipes] = useState([] as MyRecipe[]);
+  const [myRecipes, setMyRecipes] = useState([] as MyRecipe[] );
   const [ids, setIds] = useState([] as Ids[] | []);
   const [items, setItems] = useState([] as Item[]);
   const initialState = auth.isAuthenticated();
@@ -41,7 +41,6 @@ function App() {
   useEffect(() => {
     if (isAuthenticated) {
       getMyShoppingList()
-        // .then(recipes => console.log(recipes))
         .then((itemsSL) => setItems([...items, itemsSL]))
         .catch((err) => {
           setErrorMessage('Error logging getting your shopping list');
@@ -84,7 +83,6 @@ function App() {
   useEffect(() => {
     if (isAuthenticated) {
       getMyRecipes()
-        // .then(recipes => console.log(recipes))
         .then((recipes) => setMyRecipes(recipes))
         .catch((err) => {
           setErrorMessage('Error getting your recipe list');
@@ -117,7 +115,6 @@ function App() {
             />
           }
         />
-
         <Route
           path="/home"
           element={
