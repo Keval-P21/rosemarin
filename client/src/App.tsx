@@ -110,7 +110,12 @@ function App() {
         ></Route>
         <Route
           path="/logout"
-          element={<Logout setIsAuthenticated={setIsAuthenticated} />}
+          element={
+            <Logout
+              setIsAuthenticated={setIsAuthenticated}
+              setErrorMessage={setErrorMessage}
+            />
+          }
         />
 
         <Route
@@ -122,6 +127,7 @@ function App() {
               setIds={setIds}
               ids={ids}
               isAuthenticated={isAuthenticated}
+              setErrorMessage={setErrorMessage}
             />
           }
         ></Route>
@@ -135,6 +141,7 @@ function App() {
               ids={ids}
               setRecipes={setRecipes}
               isAuthenticated={isAuthenticated}
+              setErrorMessage={setErrorMessage}
             />
           }
         ></Route>
@@ -146,6 +153,7 @@ function App() {
               myRecipes={myRecipes}
               setItems={setItems}
               isAuthenticated={isAuthenticated}
+              setErrorMessage={setErrorMessage}
             />
           }
         ></Route>
@@ -156,7 +164,13 @@ function App() {
         <Route path="/menu" element={<Menu />}></Route>
       </Routes>
 
-      {isAuthenticated && <ShoppingList items={items} setItems={setItems} />}
+      {isAuthenticated && (
+        <ShoppingList
+          items={items}
+          setItems={setItems}
+          setErrorMessage={setErrorMessage}
+        />
+      )}
     </div>
   );
 }

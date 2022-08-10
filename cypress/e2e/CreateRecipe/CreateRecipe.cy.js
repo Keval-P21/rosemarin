@@ -40,6 +40,7 @@ describe('Create recipe process', () => {
     cy.get('#instruction-1').type('Put tea bag in mug and add hot water');
     cy.get('#submit').click();
     cy.wait(1000);
-    cy.get('#myRecipeList').contains(`${randomName}`).should('exist');
+    cy.get('#recipeCard').contains(`${randomName}`).should('exist');
+    cy.get('#recipeCard').contains(`${randomName}`).get('button').click();
   });
 });

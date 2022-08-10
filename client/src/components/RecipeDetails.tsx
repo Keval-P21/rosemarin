@@ -14,7 +14,13 @@ import {
 } from '../Types';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
-const RecipeDetails = ({ recipes, myRecipes, setItems, isAuthenticated }) => {
+const RecipeDetails = ({
+  recipes,
+  myRecipes,
+  setItems,
+  isAuthenticated,
+  setErrorMessage,
+}) => {
   const navigate = useNavigate();
   if (!isAuthenticated) navigate('/home');
   const [recipe, setRecipe] = useState({
@@ -56,7 +62,10 @@ const RecipeDetails = ({ recipes, myRecipes, setItems, isAuthenticated }) => {
     };
     postItem(newItem)
       .then((res) => setItems((prev) => [...prev, res]))
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        setErrorMessage('Error adding item to shopping list');
+        console.log(error);
+      });
   };
 
   const confirmDelete = () => {

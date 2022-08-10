@@ -4,7 +4,14 @@ import TopSection from './TopSection';
 import SearchForm from './SearchForm';
 import { useNavigate } from 'react-router';
 
-const RecipesList = ({ recipes, setIds, ids, setRecipes, isAuthenticated }) => {
+const RecipesList = ({
+  recipes,
+  setIds,
+  ids,
+  setRecipes,
+  isAuthenticated,
+  setErrorMessage,
+}) => {
   const navigate = useNavigate();
   if (!isAuthenticated) navigate('/home');
   return (
@@ -23,6 +30,7 @@ const RecipesList = ({ recipes, setIds, ids, setRecipes, isAuthenticated }) => {
               setIds={setIds}
               ids={ids}
               isAuthenticated={isAuthenticated}
+              setErrorMessage={setErrorMessage}
             ></Recipe>
           ) : i === 6 || i % 10 === 6 ? (
             <Recipe
@@ -34,6 +42,7 @@ const RecipesList = ({ recipes, setIds, ids, setRecipes, isAuthenticated }) => {
               setIds={setIds}
               ids={ids}
               isAuthenticated={isAuthenticated}
+              setErrorMessage={setErrorMessage}
             ></Recipe>
           ) : (
             <Recipe
@@ -43,6 +52,7 @@ const RecipesList = ({ recipes, setIds, ids, setRecipes, isAuthenticated }) => {
               setIds={setIds}
               ids={ids}
               isAuthenticated={isAuthenticated}
+              setErrorMessage={setErrorMessage}
             ></Recipe>
           )
         )}

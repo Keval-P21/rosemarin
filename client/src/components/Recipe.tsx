@@ -2,10 +2,16 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import Heart from './Heart';
 
-const Recipe = ({ recipe, className, setIds, ids, isAuthenticated }) => {
-  // console.log({recipe})
+const Recipe = ({
+  recipe,
+  className,
+  setIds,
+  ids,
+  isAuthenticated,
+  setErrorMessage,
+}) => {
   return (
-    <li className={className}>
+    <li id="recipeCard" className={className}>
       <figure>
         <img
           src={recipe.thumbnail_url || recipe.img_url || recipe.img_data}
@@ -25,6 +31,7 @@ const Recipe = ({ recipe, className, setIds, ids, isAuthenticated }) => {
                 setIds={setIds}
                 isAuthenticated={isAuthenticated}
                 ids={ids}
+                setErrorMessage={setErrorMessage}
               />
             ) : (
               <div className="text-2xl self-center mr-3">&#127910;</div>

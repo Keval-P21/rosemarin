@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { deleteRecipe, postRecipe } from '../Utils/apiDBService';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
-const Heart = ({ recipe, setIds, ids, isAuthenticated }) => {
+const Heart = ({ recipe, setIds, ids, isAuthenticated, setErrorMessage }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [currentId, setCurrentId] = useState(0);
 
@@ -53,14 +53,20 @@ const Heart = ({ recipe, setIds, ids, isAuthenticated }) => {
       };
       postRecipe(newRecipe)
         .then((res) => console.log(res))
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          setErrorMessage('Error posting recipe');
+          console.log(error);
+        });
 
       setIds((prev) => [...prev, { id: currentId, id_tasty: recipe.id }]);
     } else {
       if (window.confirm('You are removing recipe. Are you sure?')) {
         deleteRecipe({ id: currentId })
           .then((res) => console.log(res))
-          .catch((error) => console.log(error));
+          .catch((error) => {
+            setErrorMessage('Error deleting recipe ');
+            console.log(error);
+          });
         setIds((prev) => {
           const filtered = prev.filter((id) => id.id !== currentId);
           return [...filtered];

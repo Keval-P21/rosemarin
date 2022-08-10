@@ -12,12 +12,15 @@ const MyRecipesList = ({
   ids,
   setRecipes,
   isAuthenticated,
+  setErrorMessage,
 }) => {
   useEffect(() => {
     getMyRecipes()
-      // .then(recipes => console.log(recipes))
       .then((recipes) => setMyRecipes(recipes))
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setErrorMessage('Error getting your recipe list');
+        console.log(err);
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ids]);
 
@@ -44,6 +47,7 @@ const MyRecipesList = ({
               setIds={setIds}
               ids={ids}
               isAuthenticated={isAuthenticated}
+              setErrorMessage={setErrorMessage}
             ></Recipe>
           ) : i === 6 ? (
             <Recipe
@@ -55,6 +59,7 @@ const MyRecipesList = ({
               setIds={setIds}
               ids={ids}
               isAuthenticated={isAuthenticated}
+              setErrorMessage={setErrorMessage}
             ></Recipe>
           ) : i > 9 ? null : (
             <Recipe
@@ -64,6 +69,7 @@ const MyRecipesList = ({
               setIds={setIds}
               ids={ids}
               isAuthenticated={isAuthenticated}
+              setErrorMessage={setErrorMessage}
             ></Recipe>
           )
         )}

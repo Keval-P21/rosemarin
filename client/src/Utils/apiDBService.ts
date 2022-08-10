@@ -1,16 +1,13 @@
 const baseDBUrl = 'http://localhost:3001/recipes';
 
 export const getMyRecipes = () => {
-  return (
-    fetch(baseDBUrl, {
-      method: 'GET',
-      credentials: 'include',
-      headers: { 'Content-type': 'application/json' },
-    })
-      .then((response) => response.json())
-      // .then(response => console.log(response))
-      .catch((err) => console.error(err))
-  );
+  return fetch(baseDBUrl, {
+    method: 'GET',
+    credentials: 'include',
+    headers: { 'Content-type': 'application/json' },
+  })
+    .then((response) => response.json())
+    .catch((err) => console.error(err));
 };
 
 export const postRecipe = (recipe) => {
@@ -29,7 +26,7 @@ export const deleteRecipe = (id) => {
     method: 'DELETE',
     credentials: 'include',
     headers: { 'Content-type': 'application/json' },
-    body: JSON.stringify(Number(id)),
+    body: JSON.stringify({ id }),
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));
