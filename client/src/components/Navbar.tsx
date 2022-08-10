@@ -65,7 +65,11 @@ const Navbar = ({ isAuthenticated }) => {
         </div>
         <div className="ml-10">
           {isAuthenticated ? (
-            <Link className="menu-item cursor-pointer" to="/logout">
+            <Link
+              id="logoutButton"
+              className="menu-item cursor-pointer"
+              to="/logout"
+            >
               <FontAwesomeIcon
                 icon={faUserCheck as IconProp}
                 className="text-2xl cursor-pointer mr-3"
@@ -76,6 +80,7 @@ const Navbar = ({ isAuthenticated }) => {
             <Link className="menu-item cursor-pointer" to="/">
               <FontAwesomeIcon
                 icon={faUser as IconProp}
+                id="loginButton"
                 className="text-2xl cursor-pointer mr-3"
               />
               Login

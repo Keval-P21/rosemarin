@@ -9,7 +9,7 @@ export const getMyRecipes = () => {
     })
       .then((response) => response.json())
       // .then(response => console.log(response))
-      .catch((err) => console.error.bind(err))
+      .catch((err) => console.error(err))
   );
 };
 
@@ -29,7 +29,7 @@ export const deleteRecipe = (id) => {
     method: 'DELETE',
     credentials: 'include',
     headers: { 'Content-type': 'application/json' },
-    body: JSON.stringify(id),
+    body: JSON.stringify(Number(id)),
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));

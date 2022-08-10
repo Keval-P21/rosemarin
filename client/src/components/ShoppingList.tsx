@@ -10,14 +10,14 @@ const ShoppingList = ({ items, setItems }) => {
     getMyShoppingList()
       // .then(recipes => console.log(recipes))
       .then((itemsSL) => setItems(itemsSL))
-      .catch((err) => console.log.bind(err));
+      .catch((err) => console.log(err));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const delItemHandler = (id) => {
     deleteItem({ id })
       .then((res) => console.log(res))
-      .catch((err) => console.log.bind(err));
+      .catch((err) => console.log(err));
     setItems((prev) => {
       const filtered = prev.filter((item) => item.id !== id);
       return [...filtered];

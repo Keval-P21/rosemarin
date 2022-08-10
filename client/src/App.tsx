@@ -9,7 +9,6 @@ import MyRecipesList from './components/MyRecipesList';
 import CreateRecipe from './components/CreateRecipe';
 import ShoppingList from './components/ShoppingList';
 import Menu from './components/Menu';
-import WeeklyMenu from './components/WeeklyMenu';
 import RecipeDetails from './components/RecipeDetails';
 import { getMyRecipes } from './Utils/apiDBService';
 import { getMyShoppingList } from './Utils/apiDBServiceShoppingList';
@@ -27,16 +26,16 @@ function App() {
   const [items, setItems] = useState([] as Item[] | []);
   const initialState = auth.isAuthenticated();
   const [isAuthenticated, setIsAuthenticated] = useState(initialState);
+  const [errorMessage, setErrorMessage] = useState('hello');
 
   useEffect(() => {
-    try {
-      apiUserService
-        .profile()
-        .then((data) => setIsAuthenticated(data.isAuthenticated))
-        .catch((err) => console.log(err));
-    } catch (error) {
-      console.log(error);
-    }
+    apiUserService
+      .profile()
+      .then((data) => setIsAuthenticated(data.isAuthenticated))
+      .catch((err) => {
+        setErrorMessage('Error logging you in');
+        console.log(err);
+      });
   }, []);
 
   useEffect(() => {
@@ -44,7 +43,10 @@ function App() {
       getMyShoppingList()
         // .then(recipes => console.log(recipes))
         .then((itemsSL) => setItems([...items, itemsSL]))
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          setErrorMessage('Error logging getting your shopping list');
+          console.log(err);
+        });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);
@@ -53,7 +55,7 @@ function App() {
     // getRandomRecipe()
     //   // .then(recipes => console.log(recipes))
     //   .then((data) => setRecipes(data.results))
-    //   .catch((err) => console.log.bind(err));
+    //   .catch((err) => console.log(err));
     setRecipes(getRandomRecipe());
   }, []);
 
@@ -72,7 +74,10 @@ function App() {
             })
           )
         )
-        .catch((err) => console.log.bind(err));
+        .catch((err) => {
+          setErrorMessage('Error getting your recipe list');
+          console.log(err);
+        });
     }
   }, [isAuthenticated]);
 
@@ -81,7 +86,10 @@ function App() {
       getMyRecipes()
         // .then(recipes => console.log(recipes))
         .then((recipes) => setMyRecipes(recipes))
-        .catch((err) => console.log.bind(err));
+        .catch((err) => {
+          setErrorMessage('Error getting your recipe list');
+          console.log(err);
+        });
     }
   }, [ids, isAuthenticated]);
 
@@ -134,15 +142,28 @@ function App() {
               recipes={recipes}
               myRecipes={myRecipes}
               setItems={setItems}
+              isAuthenticated={isAuthenticated}
             />
           }
         ></Route>
-        <Route path="/create" element={<CreateRecipe />}></Route>
+        <Route
+          path="/create"
+          element={<CreateRecipe isAuthenticated={isAuthenticated} />}
+        ></Route>
         <Route path="/menu" element={<Menu />}></Route>
-        <Route path="/weekly_menu" element={<WeeklyMenu />}></Route>
       </Routes>
 
       {isAuthenticated && <ShoppingList items={items} setItems={setItems} />}
+      {errorMessage && (
+        <>
+          <input type="checkbox" id="error-modal" className="modal-toggle" />
+          <div className="modal">
+            <div className="modal-box">
+              <h3 className="font-bold text-lg">{errorMessage}</h3>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }

@@ -1,15 +1,27 @@
-//@ts-nocheck
-// const express = require('express');
+//Abandonned testing for this sprint
+
 // const router = require('../router');
 // const supertest = require('supertest');
-// const superagent = require('superagent');
-// const agent = superagent.agent();
 // const app = require('../index');
 
 // const User = require('../models/User');
 // const Sequelize = require('sequelize');
 // // const app = express();
 // const request = require('supertest')(app);
+
+// // session cookie Session {
+// //   cookie: {
+// //     path: '/',
+// //     _expires: 2022-08-10T16:16:59.849Z,
+// //     originalMaxAge: 3600000,
+// //     httpOnly: true
+// //   },
+// //   sid: 1
+// // }
+// //Hashed
+// // cookies: {
+// //   sid: 's:adrTZFsP9xJRlT1mGMjvaZAlPTxvpWlP.bm039LSQzFDaFMxbI6wKDaoiXfwLoIYfXPJ/x05jpE0'
+// // },
 
 // const account = {
 //   email: 'test@gmail.com',

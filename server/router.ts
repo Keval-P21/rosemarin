@@ -13,15 +13,25 @@ router.post('/login', userController.loginUser);
 router.get('/me', authMiddleware, userController.profileUser);
 router.get('/logout', authMiddleware, userController.logoutUser);
 
-router.post('/recipes', fileMiddleware, recipeController.createRecipe);
-router.put('/recipes/:id', fileMiddleware, recipeController.updateRecipe);
-router.delete('/recipes', recipeController.removeRecipe);
-router.get('/recipes', recipeController.getAllRecipes);
+router.post(
+  '/recipes',
+  authMiddleware,
+  fileMiddleware,
+  recipeController.createRecipe
+);
+router.put(
+  '/recipes/:id',
+  authMiddleware,
+  fileMiddleware,
+  recipeController.updateRecipe
+);
+router.delete('/recipes', authMiddleware, recipeController.removeRecipe);
+router.get('/recipes', authMiddleware, recipeController.getAllRecipes);
 
-router.post('/items', shoppingListController.addItem);
-router.put('/items', shoppingListController.updateItem);
+router.post('/items', authMiddleware, shoppingListController.addItem);
+router.put('/items', authMiddleware, shoppingListController.updateItem);
 router.delete('/items', shoppingListController.removeItem);
-router.get('/items', shoppingListController.getAllItems);
+router.get('/items', authMiddleware, shoppingListController.getAllItems);
 
 router.get('*', function (req: Request, res: Response) {
   // router.get('*', function (req, res) {

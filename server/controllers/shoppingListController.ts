@@ -3,7 +3,6 @@ import { Request, Response } from 'express';
 // const { Request, Response } = require('express');
 
 const addItem = async (req: Request, res: Response) => {
-  console.log(req.session.sid);
   try {
     const result = await ShoppingListItem.create({
       name: req.body.name,

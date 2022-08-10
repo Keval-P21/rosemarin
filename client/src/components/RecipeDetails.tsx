@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { postItem } from '../Utils/apiDBServiceShoppingList';
+import { deleteRecipe } from '../Utils/apiDBService';
 import {
   Section,
   Instruction,
@@ -13,7 +14,9 @@ import {
 } from '../Types';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
-const RecipeDetails = ({ recipes, myRecipes, setItems }) => {
+const RecipeDetails = ({ recipes, myRecipes, setItems, isAuthenticated }) => {
+  const navigate = useNavigate();
+  if (!isAuthenticated) navigate('/home');
   const [recipe, setRecipe] = useState({
     name: '',
     thumbnail_url: '',
@@ -29,6 +32,8 @@ const RecipeDetails = ({ recipes, myRecipes, setItems }) => {
     instructions: [] as Instruction[] | [],
   } as MyRecipe);
 
+  const [confirm, setConfirm] = useState(false);
+
   const { id } = useParams();
 
   useEffect(() => {
@@ -36,7 +41,7 @@ const RecipeDetails = ({ recipes, myRecipes, setItems }) => {
     setRecipe(result);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recipes]);
-  
+
   useEffect(() => {
     const result = myRecipes.find((res) => +id! === res.id);
     setMyRecipe(result);
@@ -54,13 +59,32 @@ const RecipeDetails = ({ recipes, myRecipes, setItems }) => {
       .catch((error) => console.log(error));
   };
 
+  const confirmDelete = () => {
+    setConfirm(true);
+  };
+
+  const cancelDelete = () => {
+    setConfirm(false);
+  };
+
+  const deleteHandlerRecipe = (id) => {
+    deleteRecipe(id);
+    navigate('/home');
+  };
+
   return recipe || myRecipe ? (
     <>
       <div className="h-[300px] flex justify-between items-center">
-        <div className="bg-top-img3 w-full h-full bg-no-repeat bg-center bg-cover"></div>
+        <div
+          className="bg-top-img3 w-full h-full bg-no-repeat bg-center bg-cover"
+          id="image-header-banner"
+        ></div>
       </div>
       <div className="bg-base-100 shadow-xl max-w-screen-xl m-auto my-20 prose lg:prose-xl">
-        <h2 className="card-title font-rufina-bold block text-center">
+        <h2
+          className="card-title font-rufina-bold block text-center"
+          id="recipe-title"
+        >
           {recipe ? recipe.name : myRecipe.title}
         </h2>
         <div className="flex">
@@ -97,7 +121,7 @@ const RecipeDetails = ({ recipes, myRecipes, setItems }) => {
                   </th>
                   <th>Quantity</th>
                   <th>Unit</th>
-                  <th>Shopping List</th>
+                  {isAuthenticated && <th>Shopping List</th>}
                 </tr>
               </thead>
               <tbody>
@@ -108,33 +132,30 @@ const RecipeDetails = ({ recipes, myRecipes, setItems }) => {
                           <th>{comp.ingredient.name}</th>
                           <td>{comp.measurements[0].quantity}</td>
                           <td>{comp.measurements[0].unit.name}</td>
-                          <td>
-                            <label className="swap swap-rotate">
-                              <input type="checkbox" />
-                              <FontAwesomeIcon
-                                icon={'fa-solid fa-plus' as IconProp}
-                                className="swap-on text-warning transition-all hover:text-orange-800 ml-10 justify-center text-xl cursor-pointer"
-                                onClick={() =>
-                                  addHandlerShoppingList({
-                                    name: comp.ingredient.name,
-                                    quantity: comp.measurements[0].quantity,
-                                    unit: comp.measurements[0].unit.name,
-                                  })
-                                }
-                              />
-                              <FontAwesomeIcon
-                                icon={'fa-solid fa-plus' as IconProp}
-                                className="swap-off text-secondary transition-all hover:text-orange-800 ml-10 justify-center text-xl cursor-pointer"
-                                onClick={() =>
-                                  addHandlerShoppingList({
-                                    name: comp.ingredient.name,
-                                    quantity: comp.measurements[0].quantity,
-                                    unit: comp.measurements[0].unit.name,
-                                  })
-                                }
-                              />
-                            </label>
-                          </td>
+                          {isAuthenticated && (
+                            <td>
+                              <label className="swap swap-rotate">
+                                <>
+                                  <input type="checkbox" />
+                                  <FontAwesomeIcon
+                                    icon={'fa-solid fa-plus' as IconProp}
+                                    className="swap-off text-secondary transition-all hover:text-orange-800 ml-10 justify-center text-xl"
+                                  />
+                                  <FontAwesomeIcon
+                                    icon={'fa-solid fa-check' as IconProp}
+                                    className="add-Shopping-item-button swap-on text-warning transition-all hover:text-orange-800 ml-10 justify-center text-xl cursor-pointer"
+                                    onClick={() => {
+                                      addHandlerShoppingList({
+                                        name: comp.ingredient.name,
+                                        quantity: comp.measurements[0].quantity,
+                                        unit: comp.measurements[0].unit.name,
+                                      });
+                                    }}
+                                  />
+                                </>
+                              </label>
+                            </td>
+                          )}
                         </tr>
                       ));
                     })
@@ -144,17 +165,26 @@ const RecipeDetails = ({ recipes, myRecipes, setItems }) => {
                         <td>{ingr.quantity}</td>
                         <td>{ingr.unit}</td>
                         <td>
-                          <FontAwesomeIcon
-                            icon={'fa-solid fa-plus' as IconProp}
-                            className="text-warning transition-all hover:text-2xl ml-10"
-                            onClick={() =>
-                              addHandlerShoppingList({
-                                name: ingr.name,
-                                quantity: ingr.quantity,
-                                unit: ingr.unit,
-                              })
-                            }
-                          />
+                          <label className="swap swap-rotate">
+                            <>
+                              <input type="checkbox" />
+                              <FontAwesomeIcon
+                                icon={'fa-solid fa-plus' as IconProp}
+                                className="swap-off text-secondary transition-all hover:text-orange-800 ml-10 justify-center text-xl"
+                              />
+                              <FontAwesomeIcon
+                                icon={'fa-solid fa-check' as IconProp}
+                                className="add-Shopping-item-button swap-on text-warning transition-all hover:text-orange-800 ml-10 justify-center text-xl cursor-pointer"
+                                onClick={() =>
+                                  addHandlerShoppingList({
+                                    name: ingr.name,
+                                    quantity: ingr.quantity,
+                                    unit: ingr.unit,
+                                  })
+                                }
+                              />
+                            </>
+                          </label>
                         </td>
                       </tr>
                     ))}
@@ -191,9 +221,34 @@ const RecipeDetails = ({ recipes, myRecipes, setItems }) => {
           ) : (
             <span></span>
           )}
-          <div className="card-actions justify-end">
-            <button className="btn btn-warning">Details</button>
-          </div>
+          {myRecipe ? (
+            confirm ? (
+              <>
+                <div className="card-actions justify-end">
+                  <p>Are you sure? This cannot be undone!</p>
+                  <button
+                    onClick={() => {
+                      deleteHandlerRecipe(id);
+                    }}
+                    className="btn btn-warning"
+                  >
+                    Yes
+                  </button>
+                  <button onClick={cancelDelete} className="btn btn-warning">
+                    No
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div className="card-actions justify-end">
+                <button onClick={confirmDelete} className="btn btn-warning">
+                  Delete
+                </button>
+              </div>
+            )
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </>

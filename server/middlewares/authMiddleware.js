@@ -3,7 +3,6 @@ const User = require('../models/User');
 const authMiddleware = async (req, res, next) => {
   try {
     const { sid } = req.session;
-    // console.log({ sid });
     if (sid) {
       req.user = await User.findByPk(sid);
       next();
