@@ -29,7 +29,10 @@ const MyRecipesList = ({
       </div>
       <SearchForm setRecipes={setRecipes}></SearchForm>
 
-      <ul className="bg-transparent container-grid max-w-7xl mx-auto pr-5 pl-5">
+      <ul
+        id="myRecipeList"
+        className="bg-transparent container-grid max-w-7xl mx-auto pr-5 pl-5"
+      >
         {myRecipes.map((recipe, i) =>
           i === 4 ? (
             <Recipe

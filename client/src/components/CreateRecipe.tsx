@@ -34,7 +34,7 @@ function CreateRecipe() {
       []
     );
 
-    const data: MyRecipe = {
+    const recipe: MyRecipe = {
       title: e.target.title.value,
       description: e.target.description.value,
       img_url: e.target.url.value || null,
@@ -43,13 +43,15 @@ function CreateRecipe() {
       ingredients: newTmpIngredients,
       instructions: instructions,
     };
-    postRecipe(data)
+    postRecipe(recipe)
       .then((res) => {
         e.target.reset();
-        navigate('/my_recipes')})
-      .catch((error) => {console.log(error);
-        setErrorMessage('Unable to add recipe.');});
-    
+        navigate('/my_recipes');
+      })
+      .catch((error) => {
+        console.log(error);
+        setErrorMessage('Unable to add recipe.');
+      });
   };
 
   const addHandlerIngredient = () => {
@@ -103,8 +105,10 @@ function CreateRecipe() {
           <input
             type="text"
             name="title"
+            id="title"
             placeholder="Type here title of your recipe..."
             className="input input-bordered w-full hover:bg-slate-50"
+            required
           />
         </div>
 
@@ -112,8 +116,10 @@ function CreateRecipe() {
           <label className="label">Description</label>
           <textarea
             name="description"
+            id="description"
             placeholder="Type here description of your recipe..."
             className="textarea input-bordered w-full hover:bg-slate-50 cursor-pointer"
+            required
           />
         </div>
 
@@ -123,11 +129,13 @@ function CreateRecipe() {
             <FontAwesomeIcon
               icon={'fa-solid fa-plus' as IconProp}
               className="text-warning transition-all hover:text-2xl ml-10"
+              id="addIngredient"
               onClick={addHandlerIngredient}
             />
             <FontAwesomeIcon
               icon={'fa-solid fa-minus' as IconProp}
               className="text-warning transition-all hover:text-2xl cursor-pointer ml-10"
+              id="delIngredient"
               onClick={delHandlerIngredient}
             />
           </label>
@@ -137,7 +145,7 @@ function CreateRecipe() {
               <div key={i} className="flex justify-between mb-3">
                 <input
                   type="text"
-                  id="name"
+                  id={`name-${i}`}
                   name="name"
                   value={name}
                   placeholder="Type here ingredient.."
@@ -146,7 +154,7 @@ function CreateRecipe() {
                 />
                 <input
                   type="number"
-                  id="quantity"
+                  id={`quantity-${i}`}
                   value={quantity}
                   name="quantity"
                   placeholder="quantity.."
@@ -155,7 +163,7 @@ function CreateRecipe() {
                 />
                 <input
                   type="text"
-                  id="unit"
+                  id={`unit-${i}`}
                   value={unit}
                   name="unit"
                   placeholder="unit.."
@@ -173,11 +181,13 @@ function CreateRecipe() {
             <FontAwesomeIcon
               icon={'fa-solid fa-plus' as IconProp}
               className="text-warning transition-all hover:text-2xl cursor-pointer ml-10"
+              id="addInstruction"
               onClick={addHandlerInstruction}
             />
             <FontAwesomeIcon
               icon={'fa-solid fa-minus' as IconProp}
               className="text-warning transition-all hover:text-2xl cursor-pointer ml-10"
+              id="delInstruction"
               onClick={delHandlerInstruction}
             />
           </label>
@@ -186,7 +196,7 @@ function CreateRecipe() {
               <textarea
                 key={i}
                 name="instruction"
-                id="instruction"
+                id={`instruction-${i}`}
                 value={instruction as string}
                 placeholder="Type here instruction.."
                 className="textarea input-bordered w-full hover:bg-slate-50"
@@ -220,7 +230,11 @@ function CreateRecipe() {
           />
         </div>
 
-        <button type="submit" className="btn btn-neutral font-rufina-regular">
+        <button
+          id="submit"
+          type="submit"
+          className="btn btn-neutral font-rufina-regular"
+        >
           Submit
         </button>
         <div className="alert-error">{errorMessage}</div>

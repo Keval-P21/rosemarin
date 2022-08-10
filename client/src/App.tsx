@@ -9,7 +9,6 @@ import MyRecipesList from './components/MyRecipesList';
 import CreateRecipe from './components/CreateRecipe';
 import ShoppingList from './components/ShoppingList';
 import Menu from './components/Menu';
-import WeeklyMenu from './components/WeeklyMenu';
 import RecipeDetails from './components/RecipeDetails';
 import { getMyRecipes } from './Utils/apiDBService';
 import { getMyShoppingList } from './Utils/apiDBServiceShoppingList';
@@ -139,7 +138,6 @@ function App() {
         ></Route>
         <Route path="/create" element={<CreateRecipe />}></Route>
         <Route path="/menu" element={<Menu />}></Route>
-        <Route path="/weekly_menu" element={<WeeklyMenu />}></Route>
       </Routes>
 
       {isAuthenticated && <ShoppingList items={items} setItems={setItems} />}

@@ -36,7 +36,7 @@ const RecipeDetails = ({ recipes, myRecipes, setItems }) => {
     setRecipe(result);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recipes]);
-  
+
   useEffect(() => {
     const result = myRecipes.find((res) => +id! === res.id);
     setMyRecipe(result);
@@ -57,10 +57,16 @@ const RecipeDetails = ({ recipes, myRecipes, setItems }) => {
   return recipe || myRecipe ? (
     <>
       <div className="h-[300px] flex justify-between items-center">
-        <div className="bg-top-img3 w-full h-full bg-no-repeat bg-center bg-cover"></div>
+        <div
+          className="bg-top-img3 w-full h-full bg-no-repeat bg-center bg-cover"
+          id="image-header-banner"
+        ></div>
       </div>
       <div className="bg-base-100 shadow-xl max-w-screen-xl m-auto my-20 prose lg:prose-xl">
-        <h2 className="card-title font-rufina-bold block text-center">
+        <h2
+          className="card-title font-rufina-bold block text-center"
+          id="recipe-title"
+        >
           {recipe ? recipe.name : myRecipe.title}
         </h2>
         <div className="flex">
@@ -113,18 +119,11 @@ const RecipeDetails = ({ recipes, myRecipes, setItems }) => {
                               <input type="checkbox" />
                               <FontAwesomeIcon
                                 icon={'fa-solid fa-plus' as IconProp}
-                                className="swap-on text-warning transition-all hover:text-orange-800 ml-10 justify-center text-xl cursor-pointer"
-                                onClick={() =>
-                                  addHandlerShoppingList({
-                                    name: comp.ingredient.name,
-                                    quantity: comp.measurements[0].quantity,
-                                    unit: comp.measurements[0].unit.name,
-                                  })
-                                }
+                                className="swap-off text-secondary transition-all hover:text-orange-800 ml-10 justify-center text-xl"
                               />
                               <FontAwesomeIcon
-                                icon={'fa-solid fa-plus' as IconProp}
-                                className="swap-off text-secondary transition-all hover:text-orange-800 ml-10 justify-center text-xl cursor-pointer"
+                                icon={'fa-solid fa-check' as IconProp}
+                                className="add-Shopping-item-button swap-on text-warning transition-all hover:text-orange-800 ml-10 justify-center text-xl cursor-pointer"
                                 onClick={() =>
                                   addHandlerShoppingList({
                                     name: comp.ingredient.name,

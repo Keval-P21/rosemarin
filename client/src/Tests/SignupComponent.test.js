@@ -84,7 +84,7 @@ describe('Signup function', () => {
   });
 
   // Test password compare validation
-  it('should show error if password and confirm password are not the same', () => {
+  it.only('should show error if password and confirm password are not the same', () => {
     render(
       <BrowserRouter>
         <SignupComponent />
