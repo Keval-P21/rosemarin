@@ -1,16 +1,45 @@
-const app = require('../index');
-const router = require('../router');
-const supertest = require('supertest');
+//@ts-nocheck
+// const express = require('express');
+// const router = require('../router');
+// const supertest = require('supertest');
+// const superagent = require('superagent');
+// const agent = superagent.agent();
+// const app = require('../index');
 
-const User = require('../models/User');
-const Sequelize = require('sequelize');
+// const User = require('../models/User');
+// const Sequelize = require('sequelize');
+// // const app = express();
+// const request = require('supertest')(app);
 
-describe('User API', () => {
-  // it('should login', async () => {
-  //   testSession
-  //     .post('/login')
-  //     .send({ email: 'test@gmail.com', password: 'password' })
-  //     .expect(200)
-  //     .end();
-  // });
-});
+// const account = {
+//   email: 'test@gmail.com',
+//   password: 'password',
+// };
+
+// const login = function (request) {
+//   request
+//     .post('/login')
+//     .send(account)
+//     .end(function (err, res) {
+//       if (err) {
+//         throw err;
+//       }
+//       agent.saveCookies(res);
+//     });
+// };
+
+// describe('User API', () => {
+//   beforeEach(function () {
+//     login(
+//       request
+//       //   , function (loginAgent) {
+//       //   agent = loginAgent;
+//       // }
+//     );
+//   });
+//   it('should allow access to /me route when logged in', async () => {
+//     const req = request.get('/me');
+//     agent.attachCookies(req);
+//     req.expect(200);
+//   });
+// });

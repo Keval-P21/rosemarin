@@ -1,1 +1,23 @@
-{}
+{
+  "name": "rosemarin",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "cypress": "^10.4.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypress:open": "cypress open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fcaud/rosemarin.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fcaud/rosemarin/issues"
+  },
+  "homepage": "https://github.com/fcaud/rosemarin#readme",
+  "description": ""
+}
