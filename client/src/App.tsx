@@ -26,7 +26,7 @@ function App() {
   const [items, setItems] = useState([] as Item[] | []);
   const initialState = auth.isAuthenticated();
   const [isAuthenticated, setIsAuthenticated] = useState(initialState);
-  const [errorMessage, setErrorMessage] = useState('hello');
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     apiUserService
@@ -95,7 +95,10 @@ function App() {
 
   return (
     <div className="font-oxy-regular">
-      <Navbar isAuthenticated={isAuthenticated}></Navbar>
+      <Navbar
+        isAuthenticated={isAuthenticated}
+        errorMessage={errorMessage}
+      ></Navbar>
       <Routes>
         <Route
           path="/"
@@ -154,16 +157,6 @@ function App() {
       </Routes>
 
       {isAuthenticated && <ShoppingList items={items} setItems={setItems} />}
-      {errorMessage && (
-        <>
-          <input type="checkbox" id="error-modal" className="modal-toggle" />
-          <div className="modal">
-            <div className="modal-box">
-              <h3 className="font-bold text-lg">{errorMessage}</h3>
-            </div>
-          </div>
-        </>
-      )}
     </div>
   );
 }
