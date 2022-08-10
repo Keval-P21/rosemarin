@@ -13,7 +13,7 @@ const SearchForm = ({ setRecipes }) => {
       //swap to commented line below if revert back to api
       // .then((data) => setRecipes(data))
       // .then((data) => setRecipes(data.results))
-      // .catch((err) => console.log.bind(err));
+      // .catch((err) => console.log(err));
     navigate('../home', { replace: true });
   }
 

@@ -8,13 +8,14 @@ import { postRecipe } from '../Utils/apiDBService';
 import { useNavigate } from 'react-router-dom';
 import { MyRecipe } from '../Types';
 
-function CreateRecipe() {
+function CreateRecipe({ isAuthenticated }) {
+  const navigate = useNavigate();
+  if (!isAuthenticated) navigate('/home');
   const [ingredients, setIngredients] = useState([
     { name: '', quantity: '', unit: '' },
   ] as Ingredient[]);
   const [instructions, setInstructions] = useState([''] as Instruction[]);
   const [errorMessage, setErrorMessage] = useState('');
-  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();

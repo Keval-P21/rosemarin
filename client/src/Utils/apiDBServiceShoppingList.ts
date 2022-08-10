@@ -7,7 +7,7 @@ export const getMyShoppingList = () => {
     headers: { 'Content-type': 'application/json' },
   })
     .then((response) => response.json())
-    .catch((err) => console.error.bind(err));
+    .catch((err) => console.error(err));
 };
 
 export const postItem = (recipe) => {

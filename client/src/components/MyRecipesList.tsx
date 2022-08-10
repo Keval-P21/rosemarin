@@ -17,13 +17,13 @@ const MyRecipesList = ({
     getMyRecipes()
       // .then(recipes => console.log(recipes))
       .then((recipes) => setMyRecipes(recipes))
-      .catch((err) => console.log.bind(err));
+      .catch((err) => console.log(err));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ids]);
 
   return (
     <div className="mb-20">
-      <TopSection></TopSection>
+      <TopSection />
       <div className="prose lg:prose-xl  m-auto mb-10 text-center">
         <h2 className="m-auto font-rufina-bold ">List of favourite recipes</h2>
       </div>
