@@ -1,5 +1,5 @@
 import { recipeCache } from '../data';
-import { Instruction, Recipe, Section } from '../Types';
+import { Instruction, Recipe, Section, Tag } from '../Types';
 
 // const headers = {
 //   'X-RapidAPI-Key': '20d2d622c5mshefaea8f4fc1579fp145ccbjsn1662f35c8e98',
@@ -32,10 +32,15 @@ export const getRandomRecipe = (tag = null) => {
         instructions: recipe.instructions as Instruction[],
         renditions: recipe.renditions,
         id: recipe.id,
+        tags: recipe.tags,
       },
     ];
     return acc;
   }, []);
 
-  return res;
+  return tag
+    ? res.filter((recipe) =>
+        recipe.tags!.some((recipeTag: Tag) => recipeTag.name === tag)
+      )
+    : res;
 };

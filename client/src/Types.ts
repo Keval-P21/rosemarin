@@ -9,6 +9,12 @@ type Section = { components: [] };
 type Ingredient = { name: string; quantity: string; unit: string };
 type Instruction = { display_text?: string; text?: string };
 type Rendition = { url: string };
+type Tag = {
+  id: number;
+  display_name: string;
+  type: string;
+  name: string;
+};
 type Recipe = {
   name: string;
   thumbnail_url: string;
@@ -18,6 +24,7 @@ type Recipe = {
   renditions: Rendition[];
   id?: number;
   id_tasty?: number | null;
+  tags: Tag[] | [];
 };
 type MyRecipe = {
   title: string;
@@ -57,4 +64,5 @@ export {
   Ids,
   AuthType,
   Item,
+  Tag,
 };

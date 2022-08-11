@@ -27,7 +27,7 @@ const SearchForm = ({ setRecipes }) => {
             placeholder="Search by category"
             name="search"
           >
-            {options.map((option) => (
+            {options.filter((option)=> option.type === 'cuisine').map((option) => (
               <option value={option.name} key={option.id}>
                 {option.display_name}
               </option>
