@@ -3,13 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import apiUserService from '../Utils/apiUserService';
 import auth from '../Utils/auth';
 
-const Logout = ({ setIsAuthenticated }) => {
-  let navigate = useNavigate();
+const Logout = ({ setIsAuthenticated, setErrorMessage }) => {
+  const navigate = useNavigate();
   const handleClick = () => {
     apiUserService
       .logout()
       .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setErrorMessage('Error logging you out');
+        console.log(err);
+      });
     handleAuth();
   };
 

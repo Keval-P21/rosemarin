@@ -18,17 +18,17 @@ const initialState: Signup = {
 
 // fields.forEach(field => fieldsState[field.id]='');
 
-function SignupComponent({setIsAuthenticated}) {
+function SignupComponent({ setIsAuthenticated }) {
   const [signupState, setSignupState] = useState(initialState);
   const [errorMessage, setErrorMessage] = useState('');
 
   const navigate = useNavigate();
 
-  const handleChange = (e) =>
-    setSignupState({ ...signupState, [e.target.id]: e.target.value });
+  const handleChange = (event) =>
+    setSignupState({ ...signupState, [event.target.id]: event.target.value });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     const { name, email, password, confirmPassword } = signupState;
     const user = { name, email, password };
 
@@ -75,7 +75,9 @@ function SignupComponent({setIsAuthenticated}) {
           validateForm={validateForm}
         />
       </div>
-      <div data-testid='signupComponentErrorMessage' className="alert-error">{errorMessage}</div>
+      <div data-testid="signupComponentErrorMessage" className="alert-error">
+        {errorMessage}
+      </div>
     </form>
   );
 }

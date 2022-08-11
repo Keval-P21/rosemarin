@@ -3,9 +3,9 @@ const path = require('path');
 const fileMiddleware = async (req, res, next) => {
   try {
     if (req.files) {
-      let file = req.files.file;
-      let ext = path.extname(file.name);
-      let newName = file.md5 + ext;
+      const file = req.files.file;
+      const ext = path.extname(file.name);
+      const newName = file.md5 + ext;
       file.mv('./images/' + newName);
       req.image = path.relative('/', './images/') + '/' + newName;
       next();

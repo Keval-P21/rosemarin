@@ -6,26 +6,18 @@ describe('Create recipe process', () => {
     cy.get('button').click();
   });
 
-  // after(() => {
-  //   // cy.get('#logoutButton').click();
-  //   // cy.wait(1000);
-  //   // cy.get('#confirmLogout').click();
-  //   cy.window().then((win) => win.sessionStorage.clear());
-  //   cy.clearCookies();
-  //   cy.clearLocalStorage();
-  // });
-
-  it('Create a recipe and show it in my recipes page', () => {
+  it('Create a recipe and show it in my recipes page, then delete the recipe and return to home', () => {
     function randRecipeName() {
-      var text = '';
-      var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-      for (var i = 0; i < 10; i++)
+      let text = '';
+      const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+      for (let i = 0; i < 10; i++)
         text += possible.charAt(Math.floor(Math.random() * possible.length));
       return text;
     }
     const randomName = randRecipeName();
     cy.wait(1000);
     cy.contains('Create Recipe').click();
+
     cy.get('#title').type(`${randomName}`);
     cy.get('#description').type('Cypress tea description');
     cy.get('#name-0').type('Tea');
@@ -41,5 +33,10 @@ describe('Create recipe process', () => {
     cy.get('#submit').click();
     cy.wait(1000);
     cy.get('#myRecipeList').contains(`${randomName}`).should('exist');
+    cy.contains(`${randomName}`).parent().contains('Details').click();
+    cy.wait(1000);
+    cy.get('#deleteRecipeButton').click();
+    cy.wait(500);
+    cy.get('#confirmDeleteButton').click();
   });
 });

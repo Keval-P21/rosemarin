@@ -14,20 +14,18 @@ const initialState: Login = {
   password: '',
 };
 
-// fields.forEach(field=>fieldsState[field.id]='');
-
 function LoginComponent({ setIsAuthenticated }) {
   const [loginState, setLoginState] = useState(initialState);
   const [errorMessage, setErrorMessage] = useState('');
 
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setLoginState({ ...loginState, [e.target.id]: e.target.value });
+  const handleChange = (event) => {
+    setLoginState({ ...loginState, [event.target.id]: event.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     const { email, password } = loginState;
     const user = { email, password };
     const res = await apiUserService.login(user);

@@ -20,13 +20,13 @@ import auth from './Utils/auth';
 import apiUserService from './Utils/apiUserService';
 
 function App() {
-  const [recipes, setRecipes] = useState([] as Recipe[] | []);
-  const [myRecipes, setMyRecipes] = useState([] as MyRecipe[] | []);
+  const [recipes, setRecipes] = useState([] as Recipe[]);
+  const [myRecipes, setMyRecipes] = useState([] as MyRecipe[] );
   const [ids, setIds] = useState([] as Ids[] | []);
-  const [items, setItems] = useState([] as Item[] | []);
+  const [items, setItems] = useState([] as Item[]);
   const initialState = auth.isAuthenticated();
   const [isAuthenticated, setIsAuthenticated] = useState(initialState);
-  const [errorMessage, setErrorMessage] = useState('hello');
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     apiUserService
@@ -41,7 +41,6 @@ function App() {
   useEffect(() => {
     if (isAuthenticated) {
       getMyShoppingList()
-        // .then(recipes => console.log(recipes))
         .then((itemsSL) => setItems([...items, itemsSL]))
         .catch((err) => {
           setErrorMessage('Error logging getting your shopping list');
@@ -84,7 +83,6 @@ function App() {
   useEffect(() => {
     if (isAuthenticated) {
       getMyRecipes()
-        // .then(recipes => console.log(recipes))
         .then((recipes) => setMyRecipes(recipes))
         .catch((err) => {
           setErrorMessage('Error getting your recipe list');
@@ -95,7 +93,10 @@ function App() {
 
   return (
     <div className="font-oxy-regular">
-      <Navbar isAuthenticated={isAuthenticated}></Navbar>
+      <Navbar
+        isAuthenticated={isAuthenticated}
+        errorMessage={errorMessage}
+      ></Navbar>
       <Routes>
         <Route
           path="/"
@@ -107,9 +108,13 @@ function App() {
         ></Route>
         <Route
           path="/logout"
-          element={<Logout setIsAuthenticated={setIsAuthenticated} />}
+          element={
+            <Logout
+              setIsAuthenticated={setIsAuthenticated}
+              setErrorMessage={setErrorMessage}
+            />
+          }
         />
-
         <Route
           path="/home"
           element={
@@ -119,6 +124,7 @@ function App() {
               setIds={setIds}
               ids={ids}
               isAuthenticated={isAuthenticated}
+              setErrorMessage={setErrorMessage}
             />
           }
         ></Route>
@@ -132,6 +138,7 @@ function App() {
               ids={ids}
               setRecipes={setRecipes}
               isAuthenticated={isAuthenticated}
+              setErrorMessage={setErrorMessage}
             />
           }
         ></Route>
@@ -143,6 +150,7 @@ function App() {
               myRecipes={myRecipes}
               setItems={setItems}
               isAuthenticated={isAuthenticated}
+              setErrorMessage={setErrorMessage}
             />
           }
         ></Route>
@@ -153,16 +161,12 @@ function App() {
         <Route path="/menu" element={<Menu />}></Route>
       </Routes>
 
-      {isAuthenticated && <ShoppingList items={items} setItems={setItems} />}
-      {errorMessage && (
-        <>
-          <input type="checkbox" id="error-modal" className="modal-toggle" />
-          <div className="modal">
-            <div className="modal-box">
-              <h3 className="font-bold text-lg">{errorMessage}</h3>
-            </div>
-          </div>
-        </>
+      {isAuthenticated && (
+        <ShoppingList
+          items={items}
+          setItems={setItems}
+          setErrorMessage={setErrorMessage}
+        />
       )}
     </div>
   );

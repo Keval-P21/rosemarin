@@ -5,19 +5,24 @@ import {
   getMyShoppingList,
 } from '../Utils/apiDBServiceShoppingList';
 
-const ShoppingList = ({ items, setItems }) => {
+const ShoppingList = ({ items, setItems, setErrorMessage }) => {
   useEffect(() => {
     getMyShoppingList()
-      // .then(recipes => console.log(recipes))
       .then((itemsSL) => setItems(itemsSL))
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setErrorMessage('Error getting your shopping list');
+        console.log(err);
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const delItemHandler = (id) => {
     deleteItem({ id })
       .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setErrorMessage('Error deleting shopping list item');
+        console.log(err);
+      });
     setItems((prev) => {
       const filtered = prev.filter((item) => item.id !== id);
       return [...filtered];

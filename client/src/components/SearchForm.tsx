@@ -8,13 +8,8 @@ const SearchForm = ({ setRecipes }) => {
 
   function searchHandler(event) {
     event.preventDefault();
-    setRecipes(getRandomRecipe(event.target.search.value))
-      // .then(recipes => console.log(recipes.results))
-      //swap to commented line below if revert back to api
-      // .then((data) => setRecipes(data))
-      // .then((data) => setRecipes(data.results))
-      // .catch((err) => console.log(err));
-    navigate('../home', { replace: true });
+    setRecipes(getRandomRecipe(event.target.search.value));
+    navigate('/home');
   }
 
   return (

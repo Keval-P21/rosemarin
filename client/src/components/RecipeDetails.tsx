@@ -14,22 +14,28 @@ import {
 } from '../Types';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
-const RecipeDetails = ({ recipes, myRecipes, setItems, isAuthenticated }) => {
+const RecipeDetails = ({
+  recipes,
+  myRecipes,
+  setItems,
+  isAuthenticated,
+  setErrorMessage,
+}) => {
   const navigate = useNavigate();
   if (!isAuthenticated) navigate('/home');
   const [recipe, setRecipe] = useState({
     name: '',
     thumbnail_url: '',
     description: '',
-    sections: [] as Section[] | [],
-    instructions: [] as Instruction[] | [],
-    renditions: [] as Rendition[] | [],
+    sections: [] as Section[],
+    instructions: [] as Instruction[],
+    renditions: [] as Rendition[],
   } as Recipe);
   const [myRecipe, setMyRecipe] = useState({
     title: '',
     description: '',
-    ingredients: [] as Ingredient[] | [],
-    instructions: [] as Instruction[] | [],
+    ingredients: [] as Ingredient[],
+    instructions: [] as Instruction[],
   } as MyRecipe);
 
   const [confirm, setConfirm] = useState(false);
@@ -56,7 +62,10 @@ const RecipeDetails = ({ recipes, myRecipes, setItems, isAuthenticated }) => {
     };
     postItem(newItem)
       .then((res) => setItems((prev) => [...prev, res]))
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        setErrorMessage('Error adding item to shopping list');
+        console.log(error);
+      });
   };
 
   const confirmDelete = () => {
@@ -227,6 +236,7 @@ const RecipeDetails = ({ recipes, myRecipes, setItems, isAuthenticated }) => {
                 <div className="card-actions justify-end">
                   <p>Are you sure? This cannot be undone!</p>
                   <button
+                    id="confirmDeleteButton"
                     onClick={() => {
                       deleteHandlerRecipe(id);
                     }}
@@ -234,14 +244,22 @@ const RecipeDetails = ({ recipes, myRecipes, setItems, isAuthenticated }) => {
                   >
                     Yes
                   </button>
-                  <button onClick={cancelDelete} className="btn btn-warning">
+                  <button
+                    id="cancelDeleteButton"
+                    onClick={cancelDelete}
+                    className="btn btn-warning"
+                  >
                     No
                   </button>
                 </div>
               </>
             ) : (
               <div className="card-actions justify-end">
-                <button onClick={confirmDelete} className="btn btn-warning">
+                <button
+                  id="deleteRecipeButton"
+                  onClick={confirmDelete}
+                  className="btn btn-warning"
+                >
                   Delete
                 </button>
               </div>

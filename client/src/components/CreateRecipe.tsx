@@ -17,8 +17,8 @@ function CreateRecipe({ isAuthenticated }) {
   const [instructions, setInstructions] = useState([''] as Instruction[]);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
     const newTmpIngredients = ingredients.reduce(
       (ingreds: Ingredient[], ing) => {
@@ -36,17 +36,17 @@ function CreateRecipe({ isAuthenticated }) {
     );
 
     const recipe: MyRecipe = {
-      title: e.target.title.value,
-      description: e.target.description.value,
-      img_url: e.target.url.value || null,
-      // files: e.target[7].files[0] || null,
-      img_alt_text: e.target.title.value || null,
+      title: event.target.title.value,
+      description: event.target.description.value,
+      img_url: event.target.url.value || null,
+      // files: event.target[7].files[0] || null,
+      img_alt_text: event.target.title.value || null,
       ingredients: newTmpIngredients,
       instructions: instructions,
     };
     postRecipe(recipe)
       .then((res) => {
-        e.target.reset();
+        event.target.reset();
         navigate('/my_recipes');
       })
       .catch((error) => {
@@ -93,7 +93,7 @@ function CreateRecipe({ isAuthenticated }) {
 
   return (
     <>
-      <TopSection></TopSection>
+      <TopSection />
       <form
         // ref={form}
         encType="multipart/form-data"

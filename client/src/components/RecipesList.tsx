@@ -1,16 +1,23 @@
 import * as React from 'react';
 import Recipe from './Recipe';
 import TopSection from './TopSection';
-import SearchForm from './SearchForm';
+// import SearchForm from './SearchForm';
 import { useNavigate } from 'react-router';
 
-const RecipesList = ({ recipes, setIds, ids, setRecipes, isAuthenticated }) => {
+const RecipesList = ({
+  recipes,
+  setIds,
+  ids,
+  setRecipes,
+  isAuthenticated,
+  setErrorMessage,
+}) => {
   const navigate = useNavigate();
   if (!isAuthenticated) navigate('/home');
   return (
     <>
-      <TopSection></TopSection>
-      <SearchForm setRecipes={setRecipes}></SearchForm>
+      <TopSection />
+      {/* <SearchForm setRecipes={setRecipes}></SearchForm> */}
       <ul className="bg-transparent container-grid max-w-7xl mx-auto pr-5 pl-5">
         {recipes.map((recipe, i) =>
           i === 4 || i % 10 === 4 ? (
@@ -23,6 +30,7 @@ const RecipesList = ({ recipes, setIds, ids, setRecipes, isAuthenticated }) => {
               setIds={setIds}
               ids={ids}
               isAuthenticated={isAuthenticated}
+              setErrorMessage={setErrorMessage}
             ></Recipe>
           ) : i === 6 || i % 10 === 6 ? (
             <Recipe
@@ -34,6 +42,7 @@ const RecipesList = ({ recipes, setIds, ids, setRecipes, isAuthenticated }) => {
               setIds={setIds}
               ids={ids}
               isAuthenticated={isAuthenticated}
+              setErrorMessage={setErrorMessage}
             ></Recipe>
           ) : (
             <Recipe
@@ -43,6 +52,7 @@ const RecipesList = ({ recipes, setIds, ids, setRecipes, isAuthenticated }) => {
               setIds={setIds}
               ids={ids}
               isAuthenticated={isAuthenticated}
+              setErrorMessage={setErrorMessage}
             ></Recipe>
           )
         )}

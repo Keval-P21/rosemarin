@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import TopSection from './TopSection';
-import SearchForm from './SearchForm';
+// import SearchForm from './SearchForm';
 import Recipe from './Recipe';
 import { getMyRecipes } from '../Utils/apiDBService';
 
@@ -12,12 +12,15 @@ const MyRecipesList = ({
   ids,
   setRecipes,
   isAuthenticated,
+  setErrorMessage,
 }) => {
   useEffect(() => {
     getMyRecipes()
-      // .then(recipes => console.log(recipes))
       .then((recipes) => setMyRecipes(recipes))
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setErrorMessage('Error getting your recipe list');
+        console.log(err);
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ids]);
 
@@ -27,7 +30,7 @@ const MyRecipesList = ({
       <div className="prose lg:prose-xl  m-auto mb-10 text-center">
         <h2 className="m-auto font-rufina-bold ">List of favourite recipes</h2>
       </div>
-      <SearchForm setRecipes={setRecipes}></SearchForm>
+      {/* <SearchForm setRecipes={setRecipes}></SearchForm> */}
 
       <ul
         id="myRecipeList"
@@ -44,6 +47,7 @@ const MyRecipesList = ({
               setIds={setIds}
               ids={ids}
               isAuthenticated={isAuthenticated}
+              setErrorMessage={setErrorMessage}
             ></Recipe>
           ) : i === 6 ? (
             <Recipe
@@ -55,6 +59,7 @@ const MyRecipesList = ({
               setIds={setIds}
               ids={ids}
               isAuthenticated={isAuthenticated}
+              setErrorMessage={setErrorMessage}
             ></Recipe>
           ) : i > 9 ? null : (
             <Recipe
@@ -64,6 +69,7 @@ const MyRecipesList = ({
               setIds={setIds}
               ids={ids}
               isAuthenticated={isAuthenticated}
+              setErrorMessage={setErrorMessage}
             ></Recipe>
           )
         )}

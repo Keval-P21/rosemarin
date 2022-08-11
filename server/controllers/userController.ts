@@ -63,8 +63,8 @@ const profileUser = async (req: Request, res: Response) => {
 };
 
 const logoutUser = (req: Request, res: Response) => {
-  req.session.destroy((e: any) => {
-    if (e) res.status(500).send({ message: 'Something went wrong' });
+  req.session.destroy((event: any) => {
+    if (event) res.status(500).send({ message: 'Something went wrong' });
     else {
       res.clearCookie('sid');
       res.sendStatus(200);

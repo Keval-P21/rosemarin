@@ -8,7 +8,7 @@ import { Instruction, Recipe, Section } from '../Types';
 // const baseURL = 'https://tasty.p.rapidapi.com/recipes/list?from=0&size=20';
 
 export const getRandomRecipe = (tag = null) => {
-  // let tagURL = '';
+  // const tagURL = '';
   // if (tag) tagURL = `&tags=${tag}`;
 
   // const options = {
@@ -19,7 +19,7 @@ export const getRandomRecipe = (tag = null) => {
   // 	.then(response => response.json())
   // 	.catch(err => console.error(err));
 
-  let recipes = recipeCache;
+  const recipes = recipeCache;
 
   const res: Recipe[] = recipes.reduce((acc: Recipe[], recipe) => {
     acc = [
