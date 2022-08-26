@@ -1,6 +1,4 @@
 import { Request, Response } from 'express';
-// const { Request, Response } = require('express');
-// const express = require('express');
 const router = require('express').Router();
 const userController = require('./controllers/userController');
 const recipeController = require('./controllers/recipeController');
@@ -34,7 +32,6 @@ router.delete('/items', shoppingListController.removeItem);
 router.get('/items', authMiddleware, shoppingListController.getAllItems);
 
 router.get('*', function (req: Request, res: Response) {
-  // router.get('*', function (req, res) {
   res
     .status(404)
     .send(

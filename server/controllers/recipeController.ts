@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-// const { Request, Response } = require('express');
 const Recipe = require('../models/Recipe');
 const IngredientModel = require('../models/Ingredient');
 const InstructionModel = require('../models/Instruction');
@@ -33,7 +32,6 @@ const createRecipe = async (req: Request, res: Response) => {
     instructions.map((instruction: Instruction) => {
       InstructionModel.create({
         text: instruction,
-        // temperature: instruction.temperature,
         RecipeId: newRecipe.id,
       });
     });
@@ -76,7 +74,6 @@ const updateRecipe = async (req: Request, res: Response) => {
     instructions.map((instruction: Instruction) => {
       InstructionModel.create({
         text: instruction,
-        // temperature: instruction.temperature,
         RecipeId: updatedRecipe.id,
       });
     });

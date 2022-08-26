@@ -1,8 +1,6 @@
 //@ts-ignore:next-line
-// const Express= require('express');
 import { Request, Response } from 'express';
 const User = require('../models/User');
-// const { Request, Response } = require('express');
 const bcrypt = require('bcryptjs');
 
 const createUser = async (req: Request, res: Response) => {
