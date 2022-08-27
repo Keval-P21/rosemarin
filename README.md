@@ -57,7 +57,7 @@ Except the regulars (git, Node, npm), you will need the following to work on and
 
 ```bash
 cd server
-npm start            # ! New terminal and change into the server !
+npm start                 # ! New terminal and change into the server !
 ```
 
 6. Start the client
