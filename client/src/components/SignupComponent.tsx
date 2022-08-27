@@ -16,8 +16,6 @@ const initialState: Signup = {
   confirmPassword: '',
 };
 
-// fields.forEach(field => fieldsState[field.id]='');
-
 function SignupComponent({ setIsAuthenticated }) {
   const [signupState, setSignupState] = useState(initialState);
   const [errorMessage, setErrorMessage] = useState('');
@@ -53,8 +51,8 @@ function SignupComponent({ setIsAuthenticated }) {
   };
 
   return (
-    <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-      <div className="">
+    <form className='mt-8 space-y-6' onSubmit={handleSubmit}>
+      <div className=''>
         {fields.map((field) => (
           <Input
             key={field.id}
@@ -71,11 +69,11 @@ function SignupComponent({ setIsAuthenticated }) {
         ))}
         <FormAction
           handleSubmit={handleSubmit}
-          text="Signup"
+          text='Signup'
           validateForm={validateForm}
         />
       </div>
-      <div data-testid="signupComponentErrorMessage" className="alert-error">
+      <div data-testid='signupComponentErrorMessage' className='alert-error'>
         {errorMessage}
       </div>
     </form>

@@ -11,19 +11,19 @@ const Recipe = ({
   setErrorMessage,
 }) => {
   return (
-    <li id="recipeCard" className={className}>
+    <li id='recipeCard' className={className}>
       <figure>
         <img
           src={recipe.thumbnail_url || recipe.img_url || recipe.img_data}
           alt={recipe.name || recipe.title}
         />
       </figure>
-      <div className="card-body">
-        <h2 className="card-title font-rufina-bold">
+      <div className='card-body'>
+        <h2 className='card-title font-rufina-bold'>
           {recipe.name || recipe.title}
         </h2>
 
-        <div className="card-actions flex justify-between">
+        <div className='card-actions flex justify-between'>
           {isAuthenticated ? (
             recipe.instructions || recipe.Instructions ? (
               <Heart
@@ -34,7 +34,7 @@ const Recipe = ({
                 setErrorMessage={setErrorMessage}
               />
             ) : (
-              <div className="text-2xl self-center mr-3">&#127910;</div>
+              <div className='text-2xl self-center mr-3'>&#127910;</div>
             )
           ) : (
             <></>
@@ -42,7 +42,7 @@ const Recipe = ({
 
           <Link
             to={/recipes/ + (recipe.id_tasty || recipe.id)}
-            className="btn btn-warning font-rufina-regular"
+            className='btn btn-warning font-rufina-regular'
           >
             Details
           </Link>

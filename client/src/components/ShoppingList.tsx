@@ -31,12 +31,12 @@ const ShoppingList = ({ items, setItems, setErrorMessage }) => {
 
   return (
     <div>
-      <input type="checkbox" id="my-modal" className="modal-toggle" />
-      <div className="modal">
-        <div className="modal-box">
-          <h3 className="font-bold text-lg">Shopping list</h3>
-          <div className="overflow-x-auto">
-            <table className="table w-full">
+      <input type='checkbox' id='my-modal' className='modal-toggle' />
+      <div className='modal'>
+        <div className='modal-box'>
+          <h3 className='font-bold text-lg'>Shopping list</h3>
+          <div className='overflow-x-auto'>
+            <table className='table w-full'>
               <thead>
                 <tr>
                   <th>Delete</th>
@@ -49,7 +49,7 @@ const ShoppingList = ({ items, setItems, setErrorMessage }) => {
                 {items?.map((item, i) => (
                   <tr key={i}>
                     <th
-                      className="text-orange-800 text-2xl cursor-pointer hover:text-black"
+                      className='text-orange-800 text-2xl cursor-pointer hover:text-black'
                       onClick={() => delItemHandler(item.id)}
                     >
                       X
@@ -63,8 +63,8 @@ const ShoppingList = ({ items, setItems, setErrorMessage }) => {
             </table>
           </div>
 
-          <div className="modal-action">
-            <label htmlFor="my-modal" className="btn btn-warning">
+          <div className='modal-action'>
+            <label htmlFor='my-modal' className='btn btn-warning'>
               Close
             </label>
           </div>

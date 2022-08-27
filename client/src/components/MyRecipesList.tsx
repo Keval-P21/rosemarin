@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useEffect } from 'react';
-import TopSection from './TopSection';
-import SearchForm from './SearchForm';
-import Recipe from './Recipe';
 import { getMyRecipes } from '../Utils/apiDBService';
+import Recipe from './Recipe';
+import SearchForm from './SearchForm';
+import TopSection from './TopSection';
 
 const MyRecipesList = ({
   myRecipes,
@@ -25,16 +25,16 @@ const MyRecipesList = ({
   }, [ids]);
 
   return (
-    <div className="mb-20">
+    <div className='mb-20'>
       <TopSection />
-      <div className="prose lg:prose-xl  m-auto mb-10 text-center">
-        <h2 className="m-auto font-rufina-bold ">List of favourite recipes</h2>
+      <div className='prose lg:prose-xl  m-auto mb-10 text-center'>
+        <h2 className='m-auto font-rufina-bold '>List of favourite recipes</h2>
       </div>
       <SearchForm setRecipes={setRecipes}></SearchForm>
 
       <ul
-        id="myRecipeList"
-        className="bg-transparent container-grid max-w-7xl mx-auto pr-5 pl-5"
+        id='myRecipeList'
+        className='bg-transparent container-grid max-w-7xl mx-auto pr-5 pl-5'
       >
         {myRecipes.map((recipe, i) =>
           i === 4 ? (
