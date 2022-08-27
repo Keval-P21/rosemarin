@@ -79,3 +79,4 @@ npm start
 
 - Freya Caudwell - [Github](https://github.com/fcaud) - [LinkedIn](https://www.linkedin.com/in/freya-caudwell/)
 - Keval Patel - [Github](https://github.com/Keval-P21) - [LinkedIn](www.linkedin.com/in/keval-r-patel)
+- Galyna Sukhovska- [GitHub](https://github.com/Gaale/rosemarin) - [LinkedIn](https://www.linkedin.com/in/sukhovska/)
