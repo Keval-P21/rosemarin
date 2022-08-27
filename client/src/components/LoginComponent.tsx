@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { loginFields } from '../constants/formFields';
+import { Login } from '../Types';
+import apiUserService from '../Utils/apiUserService';
+import auth from '../Utils/auth';
 import FormAction from './FormAction';
 import Input from './Input';
-import { useNavigate } from 'react-router-dom';
-import apiUserService from '../Utils/apiUserService';
-import { Login } from '../Types';
-import auth from '../Utils/auth';
 
 const fields = loginFields;
 const initialState: Login = {
@@ -43,8 +43,8 @@ function LoginComponent({ setIsAuthenticated }) {
   };
 
   return (
-    <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-      <div className="-space-y-px">
+    <form className='mt-8 space-y-6' onSubmit={handleSubmit}>
+      <div className='-space-y-px'>
         {fields.map((field) => (
           <Input
             key={field.id}
@@ -64,10 +64,10 @@ function LoginComponent({ setIsAuthenticated }) {
       {/* <FormExtra/> */}
       <FormAction
         handleSubmit={handleSubmit}
-        text="Login"
+        text='Login'
         validateForm={validateForm}
       />
-      <div data-testid="loginErrorMessage" className="alert-error">
+      <div data-testid='loginErrorMessage' className='alert-error'>
         {errorMessage}
       </div>
     </form>

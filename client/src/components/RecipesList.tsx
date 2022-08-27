@@ -1,8 +1,8 @@
 import * as React from 'react';
-import Recipe from './Recipe';
-import TopSection from './TopSection';
-import SearchForm from './SearchForm';
 import { useNavigate } from 'react-router';
+import Recipe from './Recipe';
+import SearchForm from './SearchForm';
+import TopSection from './TopSection';
 
 const RecipesList = ({
   recipes,
@@ -18,7 +18,7 @@ const RecipesList = ({
     <>
       <TopSection />
       <SearchForm setRecipes={setRecipes}></SearchForm>
-      <ul className="bg-transparent container-grid max-w-7xl mx-auto pr-5 pl-5">
+      <ul className='bg-transparent container-grid max-w-7xl mx-auto pr-5 pl-5'>
         {recipes.map((recipe, i) =>
           i === 4 || i % 10 === 4 ? (
             <Recipe

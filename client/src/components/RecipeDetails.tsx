@@ -1,18 +1,18 @@
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { postItem } from '../Utils/apiDBServiceShoppingList';
-import { deleteRecipe } from '../Utils/apiDBService';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
-  Section,
-  Instruction,
   Ingredient,
-  Rendition,
-  Recipe,
+  Instruction,
   MyRecipe,
+  Recipe,
+  Rendition,
+  Section,
 } from '../Types';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { deleteRecipe } from '../Utils/apiDBService';
+import { postItem } from '../Utils/apiDBServiceShoppingList';
 
 const RecipeDetails = ({
   recipes,
@@ -83,21 +83,21 @@ const RecipeDetails = ({
 
   return recipe || myRecipe ? (
     <>
-      <div className="h-[300px] flex justify-between items-center">
+      <div className='h-[300px] flex justify-between items-center'>
         <div
-          className="bg-top-img3 w-full h-full bg-no-repeat bg-center bg-cover"
-          id="image-header-banner"
+          className='bg-top-img3 w-full h-full bg-no-repeat bg-center bg-cover'
+          id='image-header-banner'
         ></div>
       </div>
-      <div className="bg-base-100 shadow-xl max-w-screen-xl m-auto my-20 prose lg:prose-xl">
+      <div className='bg-base-100 shadow-xl max-w-screen-xl m-auto my-20 prose lg:prose-xl'>
         <h2
-          className="card-title font-rufina-bold block text-center"
-          id="recipe-title"
+          className='card-title font-rufina-bold block text-center'
+          id='recipe-title'
         >
           {recipe ? recipe.name : myRecipe.title}
         </h2>
-        <div className="flex">
-          <figure className="max-w-lg ml-10">
+        <div className='flex'>
+          <figure className='max-w-lg ml-10'>
             <img
               src={
                 recipe
@@ -112,21 +112,21 @@ const RecipeDetails = ({
             />
           </figure>
           <div>
-            <p className="mx-28 pt-5">
+            <p className='mx-28 pt-5'>
               {recipe ? recipe.description : myRecipe.description}
             </p>
           </div>
         </div>
-        <div className="card-body">
-          <h3 className="font-rufina-bold block text-center mt-0">
+        <div className='card-body'>
+          <h3 className='font-rufina-bold block text-center mt-0'>
             Ingredients
           </h3>
-          <div className="overflow-x-auto">
-            <table className="table w-5/6 m-auto relative z-0">
+          <div className='overflow-x-auto'>
+            <table className='table w-5/6 m-auto relative z-0'>
               <thead>
                 <tr>
                   <th>
-                    <span className="pl-4">Name</span>
+                    <span className='pl-4'>Name</span>
                   </th>
                   <th>Quantity</th>
                   <th>Unit</th>
@@ -143,16 +143,16 @@ const RecipeDetails = ({
                           <td>{comp.measurements[0].unit.name}</td>
                           {isAuthenticated && (
                             <td>
-                              <label className="swap swap-rotate">
+                              <label className='swap swap-rotate'>
                                 <>
-                                  <input type="checkbox" />
+                                  <input type='checkbox' />
                                   <FontAwesomeIcon
                                     icon={'fa-solid fa-plus' as IconProp}
-                                    className="swap-off text-secondary transition-all hover:text-orange-800 ml-10 justify-center text-xl"
+                                    className='swap-off text-secondary transition-all hover:text-orange-800 ml-10 justify-center text-xl'
                                   />
                                   <FontAwesomeIcon
                                     icon={'fa-solid fa-check' as IconProp}
-                                    className="add-Shopping-item-button swap-on text-warning transition-all hover:text-orange-800 ml-10 justify-center text-xl cursor-pointer"
+                                    className='add-Shopping-item-button swap-on text-warning transition-all hover:text-orange-800 ml-10 justify-center text-xl cursor-pointer'
                                     onClick={() => {
                                       addHandlerShoppingList({
                                         name: comp.ingredient.name,
@@ -174,16 +174,16 @@ const RecipeDetails = ({
                         <td>{ingr.quantity}</td>
                         <td>{ingr.unit}</td>
                         <td>
-                          <label className="swap swap-rotate">
+                          <label className='swap swap-rotate'>
                             <>
-                              <input type="checkbox" />
+                              <input type='checkbox' />
                               <FontAwesomeIcon
                                 icon={'fa-solid fa-plus' as IconProp}
-                                className="swap-off text-secondary transition-all hover:text-orange-800 ml-10 justify-center text-xl"
+                                className='swap-off text-secondary transition-all hover:text-orange-800 ml-10 justify-center text-xl'
                               />
                               <FontAwesomeIcon
                                 icon={'fa-solid fa-check' as IconProp}
-                                className="add-Shopping-item-button swap-on text-warning transition-all hover:text-orange-800 ml-10 justify-center text-xl cursor-pointer"
+                                className='add-Shopping-item-button swap-on text-warning transition-all hover:text-orange-800 ml-10 justify-center text-xl cursor-pointer'
                                 onClick={() =>
                                   addHandlerShoppingList({
                                     name: ingr.name,
@@ -200,15 +200,15 @@ const RecipeDetails = ({
               </tbody>
             </table>
           </div>
-          <h3 className="font-rufina-bold block text-center">Instructions</h3>
+          <h3 className='font-rufina-bold block text-center'>Instructions</h3>
           {recipe
             ? recipe.instructions?.map((instr, i) => (
-                <p className="w-5/6 m-auto" key={i}>
+                <p className='w-5/6 m-auto' key={i}>
                   {instr.display_text}
                 </p>
               ))
             : myRecipe.instructions?.map((instr, i) => (
-                <p className="w-5/6 m-auto" key={i}>
+                <p className='w-5/6 m-auto' key={i}>
                   {instr.text}
                 </p>
               ))}
@@ -217,10 +217,10 @@ const RecipeDetails = ({
               (url, i) => (
                 <a
                   key={i}
-                  className="link-secondary text-center"
+                  className='link-secondary text-center'
                   href={url.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target='_blank'
+                  rel='noopener noreferrer'
                 >
                   {url.url}
                 </a>
@@ -233,32 +233,32 @@ const RecipeDetails = ({
           {myRecipe ? (
             confirm ? (
               <>
-                <div className="card-actions justify-end">
+                <div className='card-actions justify-end'>
                   <p>Are you sure? This cannot be undone!</p>
                   <button
-                    id="confirmDeleteButton"
+                    id='confirmDeleteButton'
                     onClick={() => {
                       deleteHandlerRecipe(id);
                     }}
-                    className="btn btn-warning"
+                    className='btn btn-warning'
                   >
                     Yes
                   </button>
                   <button
-                    id="cancelDeleteButton"
+                    id='cancelDeleteButton'
                     onClick={cancelDelete}
-                    className="btn btn-warning"
+                    className='btn btn-warning'
                   >
                     No
                   </button>
                 </div>
               </>
             ) : (
-              <div className="card-actions justify-end">
+              <div className='card-actions justify-end'>
                 <button
-                  id="deleteRecipeButton"
+                  id='deleteRecipeButton'
                   onClick={confirmDelete}
-                  className="btn btn-warning"
+                  className='btn btn-warning'
                 >
                   Delete
                 </button>
