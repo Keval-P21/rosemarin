@@ -1,26 +1,31 @@
 import { recipeCache } from '../data';
 import { Instruction, Recipe, Section, Tag } from '../Types';
 
+//The below commented out code is for use when using data from the Tasty API. It requires a API key and Host provided by Rapid API
+
 // const headers = {
-//   'X-RapidAPI-Key': '20d2d622c5mshefaea8f4fc1579fp145ccbjsn1662f35c8e98',
-//   'X-RapidAPI-Host': 'tasty.p.rapidapi.com',
+//   'X-RapidAPI-Key': process.env.REACT_APP_API_KEY,
+//   'X-RapidAPI-Host': process.env.REACT_APP_HOST,
 // };
 // const baseURL = 'https://tasty.p.rapidapi.com/recipes/list?from=0&size=20';
 
 export const getRandomRecipe = (tag = null) => {
+  //The below code is for use when using data from the Tasty API. It requires a API key and Host provided by Rapid API
+
   // const tagURL = '';
   // if (tag) tagURL = `&tags=${tag}`;
-
   // const options = {
   //   method: 'GET',
   //   headers: headers,
   // };
-  // return await fetch(`${baseURL}${tagURL}`, options)
+  // const recipes = await fetch(`${baseURL}${tagURL}`, options)
   // 	.then(response => response.json())
   // 	.catch(err => console.error(err));
 
+  // The below code is used for delivering data from the mock data.$
   const recipes = recipeCache;
 
+  // The below code is not to be touched, it is for use with both forms of data.
   const res: Recipe[] = recipes.reduce((acc: Recipe[], recipe) => {
     acc = [
       ...acc,

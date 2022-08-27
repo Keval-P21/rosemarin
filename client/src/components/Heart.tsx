@@ -1,9 +1,9 @@
+import { faHeart } from '@fortawesome/fontawesome-free-solid';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { faHeart } from '@fortawesome/fontawesome-free-solid';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { deleteRecipe, postRecipe } from '../Utils/apiDBService';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const Heart = ({ recipe, setIds, ids, isAuthenticated, setErrorMessage }) => {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -78,13 +78,13 @@ const Heart = ({ recipe, setIds, ids, isAuthenticated, setErrorMessage }) => {
     <FontAwesomeIcon
       onClick={isFavoriteHandler}
       icon={faHeart as IconProp}
-      className="text-2xl self-center mr-3 link text-error cursor-pointer"
+      className='text-2xl self-center mr-3 link text-error cursor-pointer'
     />
   ) : (
     <FontAwesomeIcon
       onClick={isFavoriteHandler}
       icon={faHeart as IconProp}
-      className="text-2xl self-center mr-3 link-secondary cursor-pointer"
+      className='text-2xl self-center mr-3 link-secondary cursor-pointer'
     />
   );
 };

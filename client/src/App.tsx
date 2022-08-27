@@ -1,27 +1,27 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import Navbar from './components/Navbar';
-import RecipesList from './components/RecipesList';
-import { getRandomRecipe } from './Utils/apiService';
-import { Routes, Route } from 'react-router-dom';
-import MyRecipesList from './components/MyRecipesList';
 import CreateRecipe from './components/CreateRecipe';
-import ShoppingList from './components/ShoppingList';
+import LoginPage from './components/Login';
+import Logout from './components/Logout';
 import Menu from './components/Menu';
+import MyRecipesList from './components/MyRecipesList';
+import Navbar from './components/Navbar';
 import RecipeDetails from './components/RecipeDetails';
+import RecipesList from './components/RecipesList';
+import ShoppingList from './components/ShoppingList';
+import SignupPage from './components/Signup';
+import { Ids, Item, MyRecipe, Recipe } from './Types';
 import { getMyRecipes } from './Utils/apiDBService';
 import { getMyShoppingList } from './Utils/apiDBServiceShoppingList';
-import LoginPage from './components/Login';
-import SignupPage from './components/Signup';
-import Logout from './components/Logout';
-import { Recipe, MyRecipe, Ids, Item } from './Types';
-import auth from './Utils/auth';
+import { getRandomRecipe } from './Utils/apiService';
 import apiUserService from './Utils/apiUserService';
+import auth from './Utils/auth';
 
 function App() {
   const [recipes, setRecipes] = useState([] as Recipe[]);
-  const [myRecipes, setMyRecipes] = useState([] as MyRecipe[] );
+  const [myRecipes, setMyRecipes] = useState([] as MyRecipe[]);
   const [ids, setIds] = useState([] as Ids[] | []);
   const [items, setItems] = useState([] as Item[]);
   const initialState = auth.isAuthenticated();
@@ -51,10 +51,16 @@ function App() {
   }, [isAuthenticated]);
 
   useEffect(() => {
+    // Only use one of the below methods!
+
+    // The below code is only for use if the API call to Tasty are implemented, otherwise this site is using mock data.
+
     // getRandomRecipe()
-    //   // .then(recipes => console.log(recipes))
     //   .then((data) => setRecipes(data.results))
     //   .catch((err) => console.log(err));
+
+    // The below code is only for use if using the mock data and not the Tasty API
+
     setRecipes(getRandomRecipe());
   }, []);
 
@@ -92,22 +98,22 @@ function App() {
   }, [ids, isAuthenticated]);
 
   return (
-    <div className="font-oxy-regular">
+    <div className='font-oxy-regular'>
       <Navbar
         isAuthenticated={isAuthenticated}
         errorMessage={errorMessage}
       ></Navbar>
       <Routes>
         <Route
-          path="/"
+          path='/'
           element={<LoginPage setIsAuthenticated={setIsAuthenticated} />}
         ></Route>
         <Route
-          path="/signup"
+          path='/signup'
           element={<SignupPage setIsAuthenticated={setIsAuthenticated} />}
         ></Route>
         <Route
-          path="/logout"
+          path='/logout'
           element={
             <Logout
               setIsAuthenticated={setIsAuthenticated}
@@ -116,7 +122,7 @@ function App() {
           }
         />
         <Route
-          path="/home"
+          path='/home'
           element={
             <RecipesList
               setRecipes={setRecipes}
@@ -129,7 +135,7 @@ function App() {
           }
         ></Route>
         <Route
-          path="/my_recipes"
+          path='/my_recipes'
           element={
             <MyRecipesList
               myRecipes={myRecipes}
@@ -143,7 +149,7 @@ function App() {
           }
         ></Route>
         <Route
-          path="/recipes/:id"
+          path='/recipes/:id'
           element={
             <RecipeDetails
               recipes={recipes}
@@ -155,10 +161,10 @@ function App() {
           }
         ></Route>
         <Route
-          path="/create"
+          path='/create'
           element={<CreateRecipe isAuthenticated={isAuthenticated} />}
         ></Route>
-        <Route path="/menu" element={<Menu />}></Route>
+        <Route path='/menu' element={<Menu />}></Route>
       </Routes>
 
       {isAuthenticated && (

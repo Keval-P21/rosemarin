@@ -1,12 +1,11 @@
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as React from 'react';
 import { useState } from 'react';
-import TopSection from './TopSection';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { Ingredient, Instruction } from '../Types';
-import { postRecipe } from '../Utils/apiDBService';
 import { useNavigate } from 'react-router-dom';
-import { MyRecipe } from '../Types';
+import { Ingredient, Instruction, MyRecipe } from '../Types';
+import { postRecipe } from '../Utils/apiDBService';
+import TopSection from './TopSection';
 
 function CreateRecipe({ isAuthenticated }) {
   const navigate = useNavigate();
@@ -39,7 +38,6 @@ function CreateRecipe({ isAuthenticated }) {
       title: event.target.title.value,
       description: event.target.description.value,
       img_url: event.target.url.value || null,
-      // files: event.target[7].files[0] || null,
       img_alt_text: event.target.title.value || null,
       ingredients: newTmpIngredients,
       instructions: instructions,
@@ -95,80 +93,79 @@ function CreateRecipe({ isAuthenticated }) {
     <>
       <TopSection />
       <form
-        // ref={form}
-        encType="multipart/form-data"
+        encType='multipart/form-data'
         onSubmit={handleSubmit}
-        className="w-2/3 m-auto form-control prose lg:prose-xl mb-40"
+        className='w-2/3 m-auto form-control prose lg:prose-xl mb-40'
       >
-        <h2 className="m-auto font-rufina-bold">Create your own recipe</h2>
+        <h2 className='m-auto font-rufina-bold'>Create your own recipe</h2>
         <div>
-          <label className="label">Title</label>
+          <label className='label'>Title</label>
           <input
-            type="text"
-            name="title"
-            id="title"
-            placeholder="Type here title of your recipe..."
-            className="input input-bordered w-full hover:bg-slate-50"
+            type='text'
+            name='title'
+            id='title'
+            placeholder='Type here title of your recipe...'
+            className='input input-bordered w-full hover:bg-slate-50'
             required
           />
         </div>
 
         <div>
-          <label className="label">Description</label>
+          <label className='label'>Description</label>
           <textarea
-            name="description"
-            id="description"
-            placeholder="Type here description of your recipe..."
-            className="textarea input-bordered w-full hover:bg-slate-50 cursor-pointer"
+            name='description'
+            id='description'
+            placeholder='Type here description of your recipe...'
+            className='textarea input-bordered w-full hover:bg-slate-50 cursor-pointer'
             required
           />
         </div>
 
         <div>
-          <label className="label justify-start mr-10">
+          <label className='label justify-start mr-10'>
             Ingredients
             <FontAwesomeIcon
               icon={'fa-solid fa-plus' as IconProp}
-              className="text-warning transition-all hover:text-2xl ml-10"
-              id="addIngredient"
+              className='text-warning transition-all hover:text-2xl ml-10'
+              id='addIngredient'
               onClick={addHandlerIngredient}
             />
             <FontAwesomeIcon
               icon={'fa-solid fa-minus' as IconProp}
-              className="text-warning transition-all hover:text-2xl cursor-pointer ml-10"
-              id="delIngredient"
+              className='text-warning transition-all hover:text-2xl cursor-pointer ml-10'
+              id='delIngredient'
               onClick={delHandlerIngredient}
             />
           </label>
           {ingredients.map((data, i) => {
             const { name, quantity, unit } = data;
             return (
-              <div key={i} className="flex justify-between mb-3">
+              <div key={i} className='flex justify-between mb-3'>
                 <input
-                  type="text"
+                  type='text'
                   id={`name-${i}`}
-                  name="name"
+                  name='name'
                   value={name}
-                  placeholder="Type here ingredient.."
-                  className="input input-bordered w-1/3 hover:bg-slate-50"
+                  placeholder='Type here ingredient..'
+                  className='input input-bordered w-1/3 hover:bg-slate-50'
                   onChange={(event) => handleChange(i, event)}
                 />
                 <input
-                  type="number"
+                  type='number'
                   id={`quantity-${i}`}
                   value={quantity}
-                  name="quantity"
-                  placeholder="quantity.."
-                  className="input input-bordered w-1/4 mr-3 hover:bg-slate-50"
+                  name='quantity'
+                  placeholder='quantity..'
+                  className='input input-bordered w-1/4 mr-3 hover:bg-slate-50'
                   onChange={(event) => handleChange(i, event)}
                 />
                 <input
-                  type="text"
+                  type='text'
                   id={`unit-${i}`}
                   value={unit}
-                  name="unit"
-                  placeholder="unit.."
-                  className="input input-bordered w-1/3 hover:bg-slate-50"
+                  name='unit'
+                  placeholder='unit..'
+                  className='input input-bordered w-1/3 hover:bg-slate-50'
                   onChange={(event) => handleChange(i, event)}
                 />
               </div>
@@ -177,18 +174,18 @@ function CreateRecipe({ isAuthenticated }) {
         </div>
 
         <div>
-          <label className="label justify-start mr-10">
+          <label className='label justify-start mr-10'>
             Instructions
             <FontAwesomeIcon
               icon={'fa-solid fa-plus' as IconProp}
-              className="text-warning transition-all hover:text-2xl cursor-pointer ml-10"
-              id="addInstruction"
+              className='text-warning transition-all hover:text-2xl cursor-pointer ml-10'
+              id='addInstruction'
               onClick={addHandlerInstruction}
             />
             <FontAwesomeIcon
               icon={'fa-solid fa-minus' as IconProp}
-              className="text-warning transition-all hover:text-2xl cursor-pointer ml-10"
-              id="delInstruction"
+              className='text-warning transition-all hover:text-2xl cursor-pointer ml-10'
+              id='delInstruction'
               onClick={delHandlerInstruction}
             />
           </label>
@@ -196,11 +193,11 @@ function CreateRecipe({ isAuthenticated }) {
             return (
               <textarea
                 key={i}
-                name="instruction"
+                name='instruction'
                 id={`instruction-${i}`}
                 value={instruction as string}
-                placeholder="Type here instruction.."
-                className="textarea input-bordered w-full hover:bg-slate-50"
+                placeholder='Type here instruction..'
+                className='textarea input-bordered w-full hover:bg-slate-50'
                 onChange={(event) => handleChangeInstructions(i, event)}
               />
             );
@@ -208,37 +205,23 @@ function CreateRecipe({ isAuthenticated }) {
         </div>
 
         <div>
-          <label className="label">URL of image</label>
+          <label className='label'>URL of image</label>
           <input
-            type="input"
-            name="url"
-            placeholder="Type here URL if needed.."
-            className="input input-bordered w-full hover:bg-slate-50"
-          />
-        </div>
-
-        <div>
-          <label className="label">Upload image</label>
-          <input
-            type="file"
-            name="file"
-            className="block w-full text-sm text-slate-500
-                       file:mr-4 file:py-2 file:px-4
-                       file:square file:border-0
-                       file:text-sm file:font-semibold
-                       file:bg-fuchsia-50 file:text-accent-700
-                       hover:file:bg-base-300 mb-10"
+            type='input'
+            name='url'
+            placeholder='Type here URL if needed..'
+            className='input input-bordered w-full hover:bg-slate-50'
           />
         </div>
 
         <button
-          id="submit"
-          type="submit"
-          className="btn btn-neutral font-rufina-regular"
+          id='submit'
+          type='submit'
+          className='btn btn-neutral font-rufina-regular'
         >
           Submit
         </button>
-        <div className="alert-error">{errorMessage}</div>
+        <div className='alert-error'>{errorMessage}</div>
       </form>
     </>
   );

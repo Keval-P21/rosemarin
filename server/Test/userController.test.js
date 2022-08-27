@@ -15,7 +15,6 @@ describe('User API - Authenticated path', () => {
     const response = await request
       .get('/me')
       .set('Cookie', [loginResponse.header['set-cookie'][0]]);
-    console.log(response.body);
     expect(response.status).toBe(200);
     expect(response.body.sid).toBe(1);
     expect(response.body.isAuthenticated).toBe(true);
