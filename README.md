@@ -26,7 +26,7 @@ Except the regulars (git, Node, npm), you will need the following to work on and
 1. Clone this repo and enter!
 
 ```bash
-   git clone https://github.com/fcaud/rosemarin.git
+   git clone https://github.com/Keval-P21/rosemarin.git
    cd rosemarin
 ```
 
